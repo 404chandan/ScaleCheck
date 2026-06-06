@@ -1,0 +1,17 @@
+{
+  "name": "scalecheck-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ScaleCheck - SRE and System Design Reviewer",
+  "scripts": {
+    "install:backend": "cmd /c \"cd backend && npm install\"",
+    "install:frontend": "cmd /c \"cd frontend && npm install\"",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "dev:backend": "cmd /c \"cd backend && npm run dev\"",
+    "dev:frontend": "cmd /c \"cd frontend && npm run dev\"",
+    "dev": "npx concurrently \"npm run dev:backend\" \"npm run dev:frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
