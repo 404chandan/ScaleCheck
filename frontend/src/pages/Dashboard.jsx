@@ -7,10 +7,12 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
   const fetchReports = async () => {
     try {
       setLoading(true);
-      const res = await fetch('http://localhost:5000/api/analysis');
+      const res = await fetch(`${API_URL}/api/analysis`);
       if (!res.ok) throw new Error('Failed to load analysis reports.');
       const data = await res.json();
       setReports(data);
@@ -33,7 +35,7 @@ export default function Dashboard() {
     if (!window.confirm('Are you sure you want to delete this analysis report?')) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/analysis/${id}`, {
+      const res = await fetch(`${API_URL}/api/analysis/${id}`, {
         method: 'DELETE'
       });
       if (res.ok) {

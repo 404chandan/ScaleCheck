@@ -18,7 +18,7 @@ export default function ReportDetail() {
   const fetchReport = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:5000/api/analysis/${id}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/analysis/${id}`);
       if (!res.ok) throw new Error('Analysis report not found.');
       const data = await res.json();
       setReport(data);

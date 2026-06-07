@@ -3,7 +3,7 @@ import { Line } from 'react-chartjs-2';
 import { Play, Square, Terminal as TermIcon, AlertTriangle } from 'lucide-react';
 
 export default function LiveTestConsole({ analysisId = 'unlinked' }) {
-  const [url, setUrl] = useState('http://localhost:5000/health');
+  const [url, setUrl] = useState(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/health`);
   const [connections, setConnections] = useState(10);
   const [duration, setDuration] = useState(10);
   
@@ -40,7 +40,7 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
     addLog(`Establishing SSE pipeline to backend load tester...`, 'info');
 
     // Create SSE query url
-    const sseUrl = `http://localhost:5000/api/loadtest/run?url=${encodeURIComponent(url)}&connections=${connections}&duration=${duration}&analysisId=${analysisId}`;
+    const sseUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/loadtest/run?url=${encodeURIComponent(url)}&connections=${connections}&duration=${duration}&analysisId=${analysisId}`;
     
     try {
       const es = new EventSource(sseUrl);
