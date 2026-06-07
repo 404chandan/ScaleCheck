@@ -5,12 +5,19 @@ import { useUser } from '../userContext';
 
 // Architect Optimization Widget
 const ArchitectWidget = () => (
-  <div className="glass-card" style={{ marginBottom: '2rem', borderLeft: '4px solid var(--primary)' }}>
-    <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', color: 'var(--primary)', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-      <CheckSquare size={16} />
-      <span>[Architect Design Workspace]</span>
-    </h3>
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', fontSize: '0.85rem' }}>
+  <div className="glass-card" style={{ marginBottom: '2rem', borderLeft: '4px solid var(--primary)', padding: 0, overflow: 'hidden' }}>
+    <div className="window-header">
+      <div className="window-dots">
+        <span className="window-dot red"></span>
+        <span className="window-dot yellow"></span>
+        <span className="window-dot green"></span>
+      </div>
+      <h3 className="window-title" style={{ color: 'var(--primary)', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <CheckSquare size={14} />
+        <span>[Architect Design Workspace]</span>
+      </h3>
+    </div>
+    <div style={{ padding: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', fontSize: '0.85rem' }}>
       <div>
         <div style={{ fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.5rem', fontFamily: 'var(--font-mono)' }}>Pending Tasks:</div>
         <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.3rem', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
@@ -33,12 +40,19 @@ const ArchitectWidget = () => (
 
 // SRE Traffic Controller Widget
 const SreWidget = () => (
-  <div className="glass-card" style={{ marginBottom: '2rem', borderLeft: '4px solid var(--secondary)' }}>
-    <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', color: 'var(--secondary)', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-      <Activity size={16} />
-      <span>[Stress Testing Log]</span>
-    </h3>
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.2rem', fontSize: '0.85rem' }}>
+  <div className="glass-card" style={{ marginBottom: '2rem', borderLeft: '4px solid var(--secondary)', padding: 0, overflow: 'hidden' }}>
+    <div className="window-header">
+      <div className="window-dots">
+        <span className="window-dot red"></span>
+        <span className="window-dot yellow"></span>
+        <span className="window-dot green"></span>
+      </div>
+      <h3 className="window-title" style={{ color: 'var(--secondary)', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <Activity size={14} />
+        <span>[Stress Testing Log]</span>
+      </h3>
+    </div>
+    <div style={{ padding: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.2rem', fontSize: '0.85rem' }}>
       <div style={{ background: 'rgba(4,3,10,0.5)', padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--surface-border)' }}>
         <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>Active Stress Test</div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--secondary)', marginTop: '0.2rem' }}>NONE [IDLE]</div>
@@ -65,56 +79,65 @@ const AuditorWidget = ({ reports }) => {
   const hasQueue = latestReport?.infrastructure.queue;
 
   return (
-    <div className="glass-card" style={{ marginBottom: '2rem', borderLeft: '4px solid var(--success)' }}>
-      <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', color: 'var(--success)', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <ShieldAlert size={16} style={{ color: 'var(--success)' }} />
-        <span>[Security & System Best Practices]</span>
-      </h3>
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', textAlign: 'left' }}>
-          <thead>
-            <tr style={{ borderBottom: '1px solid var(--surface-border)', color: 'var(--text-secondary)' }}>
-              <th style={{ padding: '0.5rem' }}>System Standard</th>
-              <th style={{ padding: '0.5rem' }}>Status</th>
-              <th style={{ padding: '0.5rem' }}>Importance</th>
-              <th style={{ padding: '0.5rem' }}>How to Fix</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-              <td style={{ padding: '0.5rem' }}>Traffic Redundancy (LB)</td>
-              <td style={{ padding: '0.5rem', color: hasLB ? 'var(--success)' : 'var(--warning)' }}>
-                {hasLB ? 'Pass: Load Balancer is active' : 'Warning: Single server endpoint'}
-              </td>
-              <td style={{ padding: '0.5rem' }}>MEDIUM</td>
-              <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Map routing table Nginx/ALB paths</td>
-            </tr>
-            <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-              <td style={{ padding: '0.5rem' }}>Database Replication Factor</td>
-              <td style={{ padding: '0.5rem', color: hasReplicas ? 'var(--success)' : 'var(--critical)' }}>
-                {hasReplicas ? 'Pass: Database replication set up' : 'Fail: Single database instance'}
-              </td>
-              <td style={{ padding: '0.5rem' }}>CRITICAL</td>
-              <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Configure read replicas set topology</td>
-            </tr>
-            <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
-              <td style={{ padding: '0.5rem' }}>Response Caching Layer</td>
-              <td style={{ padding: '0.5rem', color: hasCache ? 'var(--success)' : 'var(--text-muted)' }}>
-                {hasCache ? 'Pass: Redis cache is active' : 'Info: No cache configured'}
-              </td>
-              <td style={{ padding: '0.5rem' }}>LOW</td>
-              <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Attach in-memory Redis cluster</td>
-            </tr>
-            <tr>
-              <td style={{ padding: '0.5rem' }}>Concurrency Spike Buffering</td>
-              <td style={{ padding: '0.5rem', color: hasQueue ? 'var(--success)' : 'var(--text-muted)' }}>
-                {hasQueue ? 'Pass: Message queue is active' : 'Info: Direct database traffic'}
-              </td>
-              <td style={{ padding: '0.5rem' }}>LOW</td>
-              <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Deploy message broker (RabbitMQ/Kafka)</td>
-            </tr>
-          </tbody>
-        </table>
+    <div className="glass-card" style={{ marginBottom: '2rem', borderLeft: '4px solid var(--success)', padding: 0, overflow: 'hidden' }}>
+      <div className="window-header">
+        <div className="window-dots">
+          <span className="window-dot red"></span>
+          <span className="window-dot yellow"></span>
+          <span className="window-dot green"></span>
+        </div>
+        <h3 className="window-title" style={{ color: 'var(--success)', margin: 0, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <ShieldAlert size={14} style={{ color: 'var(--success)' }} />
+          <span>[Security & System Best Practices]</span>
+        </h3>
+      </div>
+      <div style={{ padding: '1.5rem' }}>
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', textAlign: 'left' }}>
+            <thead>
+              <tr style={{ borderBottom: '1px solid var(--surface-border)', color: 'var(--text-secondary)' }}>
+                <th style={{ padding: '0.5rem' }}>System Standard</th>
+                <th style={{ padding: '0.5rem' }}>Status</th>
+                <th style={{ padding: '0.5rem' }}>Importance</th>
+                <th style={{ padding: '0.5rem' }}>How to Fix</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                <td style={{ padding: '0.5rem' }}>Traffic Redundancy (LB)</td>
+                <td style={{ padding: '0.5rem', color: hasLB ? 'var(--success)' : 'var(--warning)' }}>
+                  {hasLB ? 'Pass: Load Balancer is active' : 'Warning: Single server endpoint'}
+                </td>
+                <td style={{ padding: '0.5rem' }}>MEDIUM</td>
+                <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Map routing table Nginx/ALB paths</td>
+              </tr>
+              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                <td style={{ padding: '0.5rem' }}>Database Replication Factor</td>
+                <td style={{ padding: '0.5rem', color: hasReplicas ? 'var(--success)' : 'var(--critical)' }}>
+                  {hasReplicas ? 'Pass: Database replication set up' : 'Fail: Single database instance'}
+                </td>
+                <td style={{ padding: '0.5rem' }}>CRITICAL</td>
+                <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Configure read replicas set topology</td>
+              </tr>
+              <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+                <td style={{ padding: '0.5rem' }}>Response Caching Layer</td>
+                <td style={{ padding: '0.5rem', color: hasCache ? 'var(--success)' : 'var(--text-muted)' }}>
+                  {hasCache ? 'Pass: Redis cache is active' : 'Info: No cache configured'}
+                </td>
+                <td style={{ padding: '0.5rem' }}>LOW</td>
+                <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Attach in-memory Redis cluster</td>
+              </tr>
+              <tr>
+                <td style={{ padding: '0.5rem' }}>Concurrency Spike Buffering</td>
+                <td style={{ padding: '0.5rem', color: hasQueue ? 'var(--success)' : 'var(--text-muted)' }}>
+                  {hasQueue ? 'Pass: Message queue is active' : 'Info: Direct database traffic'}
+                </td>
+                <td style={{ padding: '0.5rem' }}>LOW</td>
+                <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Deploy message broker (RabbitMQ/Kafka)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
@@ -232,30 +255,50 @@ export default function Dashboard() {
 
       {/* Stats Cards */}
       <div className="stats-grid">
-        <div className="glass-card stat-card">
-          <div className="stat-title">Total Reports</div>
+        <div className="glass-card stat-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '130px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div className="stat-title">Total Reports</div>
+            <span style={{ fontSize: '0.7rem', color: 'var(--secondary)', display: 'flex', alignItems: 'center', gap: '2px', background: 'rgba(6, 182, 212, 0.1)', padding: '2px 6px', borderRadius: '4px', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>
+              ▲ ACTIVE
+            </span>
+          </div>
           <div className="stat-val text-cyan-gradient">{stats.total}</div>
           <div className="stat-sub">Designs analyzed</div>
         </div>
 
-        <div className="glass-card stat-card">
-          <div className="stat-title">Average Score</div>
+        <div className="glass-card stat-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '130px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div className="stat-title">Average Score</div>
+            <span style={{ fontSize: '0.7rem', color: 'var(--success)', display: 'flex', alignItems: 'center', gap: '2px', background: 'var(--success-bg)', padding: '2px 6px', borderRadius: '4px', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>
+              ▲ +2.4%
+            </span>
+          </div>
           <div className="stat-val" style={{ color: stats.avgScore >= 80 ? 'var(--success)' : stats.avgScore >= 60 ? 'var(--warning)' : 'var(--critical)' }}>
             {stats.avgScore} <span style={{ fontSize: '1.2rem' }}>/100</span>
           </div>
           <div className="stat-sub">Across all architectures</div>
         </div>
 
-        <div className="glass-card stat-card">
-          <div className="stat-title">Weak Architectures</div>
+        <div className="glass-card stat-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '130px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div className="stat-title">Weak Architectures</div>
+            <span style={{ fontSize: '0.7rem', color: stats.criticalCount > 0 ? 'var(--critical)' : 'var(--success)', display: 'flex', alignItems: 'center', gap: '2px', background: stats.criticalCount > 0 ? 'var(--critical-bg)' : 'var(--success-bg)', padding: '2px 6px', borderRadius: '4px', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>
+              {stats.criticalCount > 0 ? '▼ WARNING' : '■ ALL CLEAR'}
+            </span>
+          </div>
           <div className="stat-val" style={{ color: stats.criticalCount > 0 ? 'var(--critical)' : 'var(--text-secondary)' }}>
             {stats.criticalCount}
           </div>
           <div className="stat-sub">Below 60/100</div>
         </div>
 
-        <div className="glass-card stat-card">
-          <div className="stat-title">Stable Architectures</div>
+        <div className="glass-card stat-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '130px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div className="stat-title">Stable Architectures</div>
+            <span style={{ fontSize: '0.7rem', color: 'var(--success)', display: 'flex', alignItems: 'center', gap: '2px', background: 'var(--success-bg)', padding: '2px 6px', borderRadius: '4px', fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>
+              ▲ +12%
+            </span>
+          </div>
           <div className="stat-val" style={{ color: 'var(--success)' }}>{stats.healthyCount}</div>
           <div className="stat-sub">Above 80/100</div>
         </div>

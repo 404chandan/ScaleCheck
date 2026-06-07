@@ -88,91 +88,98 @@ const TrafficFlowVisualizer = () => {
   }, [trafficRate]);
 
   return (
-    <div className="glass-card" style={{ padding: '1.5rem', flex: 1, position: 'relative', overflow: 'hidden' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem' }}>
-        <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--secondary)' }}>
-          <Activity size={16} />
+    <div className="glass-card" style={{ padding: 0, flex: 1, position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+      <div className="window-header">
+        <div className="window-dots">
+          <span className="window-dot red"></span>
+          <span className="window-dot yellow"></span>
+          <span className="window-dot green"></span>
+        </div>
+        <h4 className="window-title" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--secondary)', margin: 0 }}>
+          <Activity size={14} />
           <span>REAL-TIME PACKET FLOW INJECTOR SIMULATION</span>
         </h4>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', background: 'rgba(6, 182, 212, 0.1)', color: 'var(--secondary)', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', background: 'rgba(6, 182, 212, 0.1)', color: 'var(--secondary)', padding: '0.1rem 0.4rem', borderRadius: '4px', marginLeft: '1rem' }}>
           RATE: {trafficRate * 4} RPS
         </div>
       </div>
 
-      {/* SVG Canvas */}
-      <div style={{ background: '#04030a', border: '1px solid var(--surface-border)', borderRadius: 'var(--radius-md)', padding: '1rem', position: 'relative', height: '200px' }}>
-        <svg width="100%" height="100%" viewBox="0 0 500 180" style={{ overflow: 'visible' }}>
-          {/* Paths */}
-          <line x1="50" y1="90" x2="150" y2="90" stroke="#334155" strokeWidth="2" strokeDasharray="4 4" />
-          <path d="M 150 90 Q 200 40 250 40 T 350 40" fill="none" stroke="#334155" strokeWidth="2" strokeDasharray="4 4" />
-          <path d="M 150 90 Q 200 140 250 140 T 350 140" fill="none" stroke="#334155" strokeWidth="2" strokeDasharray="4 4" />
-          <line x1="350" y1="90" x2="450" y2="90" stroke="#334155" strokeWidth="2" strokeDasharray="4 4" />
+      <div style={{ padding: '1.25rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        {/* SVG Canvas */}
+        <div style={{ background: '#04030a', border: '1px solid var(--surface-border)', borderRadius: 'var(--radius-md)', padding: '1rem', position: 'relative', height: '200px' }}>
+          <svg width="100%" height="100%" viewBox="0 0 500 180" style={{ overflow: 'visible' }}>
+            {/* Paths */}
+            <line x1="50" y1="90" x2="150" y2="90" stroke="#334155" strokeWidth="2" strokeDasharray="4 4" />
+            <path d="M 150 90 Q 200 40 250 40 T 350 40" fill="none" stroke="#334155" strokeWidth="2" strokeDasharray="4 4" />
+            <path d="M 150 90 Q 200 140 250 140 T 350 140" fill="none" stroke="#334155" strokeWidth="2" strokeDasharray="4 4" />
+            <line x1="350" y1="90" x2="450" y2="90" stroke="#334155" strokeWidth="2" strokeDasharray="4 4" />
 
-          {/* Node Circles */}
-          {/* Client node */}
-          <circle cx="50" cy="90" r="14" fill="#0c1b35" stroke="var(--primary)" strokeWidth="2" />
-          <text x="50" y="94" textAnchor="middle" fill="#fff" fontSize="8" fontFamily="var(--font-mono)" fontWeight="bold">CLI</text>
+            {/* Node Circles */}
+            {/* Client node */}
+            <circle cx="50" cy="90" r="14" fill="#0c1b35" stroke="var(--primary)" strokeWidth="2" />
+            <text x="50" y="94" textAnchor="middle" fill="#fff" fontSize="8" fontFamily="var(--font-mono)" fontWeight="bold">CLI</text>
 
-          {/* Load Balancer */}
-          <circle cx="150" cy="90" r="14" fill="#062f3c" stroke="var(--secondary)" strokeWidth="2" />
-          <text x="150" y="94" textAnchor="middle" fill="#fff" fontSize="8" fontFamily="var(--font-mono)" fontWeight="bold">LB</text>
+            {/* Load Balancer */}
+            <circle cx="150" cy="90" r="14" fill="#062f3c" stroke="var(--secondary)" strokeWidth="2" />
+            <text x="150" y="94" textAnchor="middle" fill="#fff" fontSize="8" fontFamily="var(--font-mono)" fontWeight="bold">LB</text>
 
-          {/* Cache Node */}
-          <circle cx="250" cy="40" r="14" fill="#3c0b24" stroke="#ec4899" strokeWidth="2" />
-          <text x="250" y="44" textAnchor="middle" fill="#fff" fontSize="8" fontFamily="var(--font-mono)" fontWeight="bold">REDIS</text>
+            {/* Cache Node */}
+            <circle cx="250" cy="40" r="14" fill="#3c0b24" stroke="#ec4899" strokeWidth="2" />
+            <text x="250" y="44" textAnchor="middle" fill="#fff" fontSize="8" fontFamily="var(--font-mono)" fontWeight="bold">REDIS</text>
 
-          {/* Backend API Node */}
-          <circle cx="350" cy="90" r="14" fill="#1b1235" stroke="#a855f7" strokeWidth="2" />
-          <text x="350" y="94" textAnchor="middle" fill="#fff" fontSize="8" fontFamily="var(--font-mono)" fontWeight="bold">API</text>
+            {/* Backend API Node */}
+            <circle cx="350" cy="90" r="14" fill="#1b1235" stroke="#a855f7" strokeWidth="2" />
+            <text x="350" y="94" textAnchor="middle" fill="#fff" fontSize="8" fontFamily="var(--font-mono)" fontWeight="bold">API</text>
 
-          {/* DB Replica */}
-          <circle cx="250" cy="140" r="14" fill="#072d1f" stroke="var(--success)" strokeWidth="2" />
-          <text x="250" y="144" textAnchor="middle" fill="#fff" fontSize="8" fontFamily="var(--font-mono)" fontWeight="bold">PG_DB</text>
+            {/* DB Replica */}
+            <circle cx="250" cy="140" r="14" fill="#072d1f" stroke="var(--success)" strokeWidth="2" />
+            <text x="250" y="144" textAnchor="middle" fill="#fff" fontSize="8" fontFamily="var(--font-mono)" fontWeight="bold">PG_DB</text>
 
-          {/* Dynamic Packets */}
-          {activePackets.map(p => {
-            // Map offset (0 to 400) to coordinates along the nodes
-            let cx = 50 + (p.offset * 0.95);
-            let cy = 90;
-            
-            if (p.offset > 100 && p.offset <= 300) {
-              const localOffset = (p.offset - 100) / 200; // 0 to 1
-              cx = 150 + localOffset * 200;
-              cy = p.y === 60 
-                ? 90 - Math.sin(localOffset * Math.PI) * 45 // upper loop cache
-                : 90 + Math.sin(localOffset * Math.PI) * 45; // lower loop db
-            } else if (p.offset > 300) {
-              cx = 350 + ((p.offset - 300) * 1.0);
-              cy = 90;
-            }
+            {/* Dynamic Packets */}
+            {activePackets.map(p => {
+              // Map offset (0 to 400) to coordinates along the nodes
+              let cx = 50 + (p.offset * 0.95);
+              let cy = 90;
+              
+              if (p.offset > 100 && p.offset <= 300) {
+                const localOffset = (p.offset - 100) / 200; // 0 to 1
+                cx = 150 + localOffset * 200;
+                cy = p.y === 60 
+                  ? 90 - Math.sin(localOffset * Math.PI) * 45 // upper loop cache
+                  : 90 + Math.sin(localOffset * Math.PI) * 45; // lower loop db
+              } else if (p.offset > 300) {
+                cx = 350 + ((p.offset - 300) * 1.0);
+                cy = 90;
+              }
 
-            return (
-              <circle
-                key={p.id}
-                cx={cx}
-                cy={cy}
-                r="3"
-                fill={p.y === 60 ? "#ec4899" : "var(--success)"}
-                filter="drop-shadow(0 0 3px rgba(255,255,255,0.8))"
-              />
-            );
-          })}
-        </svg>
-      </div>
-
-      <div style={{ marginTop: '1rem' }} className="simulator-slider-group">
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-          <span>SIMULATED LOAD LEVEL</span>
-          <span style={{ fontFamily: 'var(--font-mono)' }}>{trafficRate}%</span>
+              return (
+                <circle
+                  key={p.id}
+                  cx={cx}
+                  cy={cy}
+                  r="3"
+                  fill={p.y === 60 ? "#ec4899" : "var(--success)"}
+                  filter="drop-shadow(0 0 3px rgba(255,255,255,0.8))"
+                />
+              );
+            })}
+          </svg>
         </div>
-        <input 
-          type="range" 
-          min="10" 
-          max="100" 
-          value={trafficRate} 
-          onChange={(e) => setTrafficRate(Number(e.target.value))} 
-          className="sim-slider" 
-        />
+
+        <div style={{ marginTop: '0.5rem' }} className="simulator-slider-group">
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+            <span>SIMULATED LOAD LEVEL</span>
+            <span style={{ fontFamily: 'var(--font-mono)' }}>{trafficRate}%</span>
+          </div>
+          <input 
+            type="range" 
+            min="10" 
+            max="100" 
+            value={trafficRate} 
+            onChange={(e) => setTrafficRate(Number(e.target.value))} 
+            className="sim-slider" 
+          />
+        </div>
       </div>
     </div>
   );
@@ -265,8 +272,12 @@ export default function LandingPage() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem', position: 'relative' }}>
       
+      {/* Ambient Glow Blobs */}
+      <div className="ambient-glow-login" style={{ top: '15%', left: '10%', opacity: 0.7 }}></div>
+      <div className="ambient-glow-login" style={{ top: '70%', left: '80%', background: 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 75%)', opacity: 0.7 }}></div>
+
       {/* Title & ASCII art Area */}
       <div style={{ textAlign: 'center', marginTop: '1rem' }}>
         <pre style={{ 
@@ -298,43 +309,49 @@ export default function LandingPage() {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', alignItems: 'stretch' }}>
         
         {/* Interactive Terminal console */}
-        <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', height: '380px', position: 'relative', overflow: 'hidden' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem' }}>
-            <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--success)' }}>
-              <Terminal size={16} />
+        <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', height: '380px', position: 'relative', overflow: 'hidden', padding: 0 }}>
+          <div className="window-header">
+            <div className="window-dots">
+              <span className="window-dot red"></span>
+              <span className="window-dot yellow"></span>
+              <span className="window-dot green"></span>
+            </div>
+            <h4 className="window-title" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--success)', margin: 0 }}>
+              <Terminal size={14} />
               <span>Console Terminal</span>
             </h4>
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--success)', boxShadow: '0 0 8px var(--success)' }} />
           </div>
 
-          <div style={{ flex: 1, overflowY: 'auto', fontFamily: 'var(--font-mono)', fontSize: '0.8rem', display: 'flex', flexDirection: 'column', gap: '0.3rem', paddingRight: '0.5rem' }}>
-            {terminalLogs.map((log, idx) => (
-              <div key={idx} style={{ 
-                color: log.type === 'error' ? 'var(--critical)' : 
-                       log.type === 'success' ? 'var(--success)' : 
-                       log.type === 'info' ? 'var(--secondary)' : 
-                       log.type === 'input' ? 'var(--text-primary)' : 'var(--text-secondary)',
-                whiteSpace: 'pre-wrap'
-              }}>
-                {log.text}
-              </div>
-            ))}
-            <div ref={terminalEndRef} />
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem', padding: '1.25rem', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ flex: 1, overflowY: 'auto', fontFamily: 'var(--font-mono)', fontSize: '0.8rem', display: 'flex', flexDirection: 'column', gap: '0.3rem', paddingRight: '0.5rem', zIndex: 1 }}>
+              {terminalLogs.map((log, idx) => (
+                <div key={idx} style={{ 
+                  color: log.type === 'error' ? 'var(--critical)' : 
+                         log.type === 'success' ? 'var(--success)' : 
+                         log.type === 'info' ? 'var(--secondary)' : 
+                         log.type === 'input' ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  whiteSpace: 'pre-wrap'
+                }}>
+                  {log.text}
+                </div>
+              ))}
+              <div ref={terminalEndRef} />
+            </div>
+
+            <MatrixRain active={matrixActive} />
+
+            <form onSubmit={handleCliSubmit} style={{ display: 'flex', borderTop: '1px solid var(--surface-border)', paddingTop: '0.5rem', zIndex: 1 }}>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--success)', paddingRight: '0.5rem' }}>sre@scalecheck:~$</span>
+              <input 
+                type="text" 
+                className="form-control" 
+                style={{ flex: 1, background: 'transparent', border: 'none', padding: 0, outline: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: '#fff' }}
+                placeholder="type help for options..."
+                value={cliInput}
+                onChange={(e) => setCliInput(e.target.value)}
+              />
+            </form>
           </div>
-
-          <MatrixRain active={matrixActive} />
-
-          <form onSubmit={handleCliSubmit} style={{ display: 'flex', borderTop: '1px solid var(--surface-border)', paddingTop: '0.5rem' }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--success)', paddingRight: '0.5rem' }}>sre@scalecheck:~$</span>
-            <input 
-              type="text" 
-              className="form-control" 
-              style={{ flex: 1, background: 'transparent', border: 'none', padding: 0, outline: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: '#fff' }}
-              placeholder="type help for options..."
-              value={cliInput}
-              onChange={(e) => setCliInput(e.target.value)}
-            />
-          </form>
         </div>
 
         {/* Dynamic visual flow simulator */}
