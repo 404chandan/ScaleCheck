@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
-import { ShieldCheck, LayoutDashboard, FileSpreadsheet, Activity, LogOut, LogIn } from 'lucide-react';
+import { ShieldCheck, LayoutDashboard, FileSpreadsheet, Activity, LogOut, LogIn, Terminal } from 'lucide-react';
 import { useUser } from '../userContext';
 
 export default function Navbar() {
