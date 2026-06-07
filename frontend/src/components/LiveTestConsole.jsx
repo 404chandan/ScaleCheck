@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Line } from 'react-chartjs-2';
-import { Play, Square, Terminal as TermIcon, AlertTriangle } from 'lucide-react';
+import { Play, Square, Terminal as TermIcon, AlertTriangle, ShieldAlert } from 'lucide-react';
+import { useUser } from '../userContext';
 
 export default function LiveTestConsole({ analysisId = 'unlinked' }) {
+  const { user } = useUser();
   const [url, setUrl] = useState(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/health`);
   const [connections, setConnections] = useState(10);
   const [duration, setDuration] = useState(10);
@@ -66,7 +68,7 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
         else if (message.type === 'done') {
           const res = message.results;
           addLog(`--------------------------------------------------`, 'info');
-          addLog(`✔ STRESS TEST SUCCESSFUL!`, 'success');
+          addLog(`[OK] STRESS TEST SUCCESSFUL!`, 'success');
           addLog(`Total Requests Sent: ${res.results.totalRequests}`, 'success');
           addLog(`Average Throughput: ${Math.round(res.results.throughput)} requests/sec`, 'success');
           addLog(`Average Latency: ${Math.round(res.results.averageLatency)}ms`, 'success');
@@ -80,20 +82,20 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
         }
 
         else if (message.type === 'error') {
-          addLog(`❌ Server Error: ${message.message}`, 'error');
+          addLog(`[ERR] Server Error: ${message.message}`, 'error');
           setIsRunning(false);
           es.close();
         }
       };
 
       es.onerror = (err) => {
-        addLog(`❌ Connection lost or failed to start. Ensure backend is running.`, 'error');
+        addLog(`[ERR] Connection lost or failed to start. Ensure backend is running.`, 'error');
         setIsRunning(false);
         es.close();
       };
 
     } catch (err) {
-      addLog(`❌ Failed to establish connection: ${err.message}`, 'error');
+      addLog(`[ERR] Failed to establish connection: ${err.message}`, 'error');
       setIsRunning(false);
     }
   };
@@ -101,7 +103,7 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
   const cancelTest = () => {
     if (!isRunning) return;
 
-    addLog(`⏹ Stress test aborted by user. Tearing down connections...`, 'error');
+    addLog(`[SIGINT] Stress test aborted by user. Tearing down connections...`, 'error');
     if (eventSourceRef.current) {
       eventSourceRef.current.close();
     }
@@ -189,7 +191,7 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
             placeholder="http://localhost:5000/health"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            disabled={isRunning}
+            disabled={isRunning || user?.role !== 'sre'}
           />
         </div>
 
@@ -202,7 +204,7 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
               max="100"
               value={connections}
               onChange={(e) => setConnections(Number(e.target.value))}
-              disabled={isRunning}
+              disabled={isRunning || user?.role !== 'sre'}
               className="sim-slider"
             />
           </div>
@@ -214,7 +216,7 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
               max="60"
               value={duration}
               onChange={(e) => setDuration(Number(e.target.value))}
-              disabled={isRunning}
+              disabled={isRunning || user?.role !== 'sre'}
               className="sim-slider"
             />
           </div>
@@ -222,16 +224,25 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
 
         {/* Start/Cancel controls */}
         <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-          {!isRunning ? (
-            <button className="btn btn-primary" onClick={startTest} style={{ flex: 1 }}>
-              <Play size={16} />
-              <span>Launch Stress Test</span>
-            </button>
+          {user?.role !== 'sre' ? (
+            <div className="glass-card" style={{ background: 'var(--critical-bg)', borderColor: 'rgba(239, 68, 68, 0.2)', padding: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
+              <ShieldAlert size={16} style={{ color: 'var(--critical)' }} />
+              <span style={{ fontSize: '0.75rem', color: 'var(--critical)', fontFamily: 'var(--font-mono)' }}>
+                [ERR_CLEARANCE_REQUIRED] CONCURRENCY STRESS INJECTION REQUIRES LEVEL_8 SRE CONTEXT. VIEW MODE ONLY.
+              </span>
+            </div>
           ) : (
-            <button className="btn btn-danger" onClick={cancelTest} style={{ flex: 1 }}>
-              <Square size={16} />
-              <span>Abort Load Test</span>
-            </button>
+            !isRunning ? (
+              <button className="btn btn-primary" onClick={startTest} style={{ flex: 1 }}>
+                <Play size={16} />
+                <span>Launch Stress Test</span>
+              </button>
+            ) : (
+              <button className="btn btn-danger" onClick={cancelTest} style={{ flex: 1 }}>
+                <Square size={16} />
+                <span>Abort Load Test</span>
+              </button>
+            )
           )}
         </div>
       </div>

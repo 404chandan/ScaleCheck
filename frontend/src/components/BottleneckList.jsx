@@ -42,7 +42,7 @@ export default function BottleneckList({ bottlenecks = [], aiRecommendations = [
         
         {bottlenecks.length === 0 ? (
           <div className="glass-card" style={{ textAlign: 'center', color: 'var(--success)', padding: '2rem' }}>
-            <p style={{ fontWeight: '600' }}>✓ No critical bottlenecks detected!</p>
+            <p style={{ fontWeight: '600' }}>[PASS] No critical bottlenecks detected!</p>
             <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>Your system parameters fit within standard scaling capabilities.</p>
           </div>
         ) : (

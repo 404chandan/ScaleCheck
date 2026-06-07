@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, ShieldAlert, Plus, Trash2, CheckCircle2 } from 'lucide-react';
+import { useUser } from '../userContext';
 
 export default function CreateAnalysis() {
+  const { user } = useUser();
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -58,6 +60,7 @@ export default function CreateAnalysis() {
   };
 
   const handleInfraToggle = (key) => {
+    if (user?.role !== 'architect') return;
     setInfrastructure(prev => ({
       ...prev,
       [key]: !prev[key]
@@ -102,6 +105,14 @@ export default function CreateAnalysis() {
 
   return (
     <div className="wizard-container">
+      {user?.role !== 'architect' && (
+        <div className="glass-card" style={{ marginBottom: '1.5rem', background: 'var(--critical-bg)', borderColor: 'rgba(239, 68, 68, 0.2)', padding: '0.8rem 1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <ShieldAlert size={16} style={{ color: 'var(--critical)' }} />
+          <span style={{ fontSize: '0.8rem', color: 'var(--critical)', fontFamily: 'var(--font-mono)' }}>
+            [READ_ONLY] TOPOLOGY CONFIGURATION PRESET BY PRINCIPAL ARCHITECT. EDITS RESTRICTED FOR ROLE: {user?.role ? user.role.toUpperCase() : 'GUEST'}.
+          </span>
+        </div>
+      )}
       <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
         <h1 className="text-gradient" style={{ fontSize: '2rem' }}>Configure Architecture Profile</h1>
         <p style={{ color: 'var(--text-secondary)' }}>Provide system parameters. The SRE engine will map risk indices and failure bottlenecks.</p>
@@ -117,6 +128,7 @@ export default function CreateAnalysis() {
       </div>
 
       <div className="glass-card" style={{ padding: '2rem' }}>
+        <fieldset disabled={user?.role !== 'architect' || loading} style={{ border: 'none', padding: 0, margin: 0 }}>
         
         {/* STEP 1: GENERAL INFO */}
         {step === 1 && (
@@ -376,10 +388,10 @@ export default function CreateAnalysis() {
                   <span className="toggle-desc">RabbitMQ, Kafka, or BullMQ</span>
                 </div>
               </div>
-
             </div>
           </div>
         )}
+        </fieldset>
 
         {/* Form navigation */}
         <div className="wizard-footer">
@@ -396,7 +408,7 @@ export default function CreateAnalysis() {
               Next <ArrowRight size={16} />
             </button>
           ) : (
-            <button className="btn btn-primary" onClick={submitAnalysis} disabled={loading}>
+            <button className="btn btn-primary" onClick={submitAnalysis} disabled={loading || user?.role !== 'architect'}>
               {loading ? (
                 <span>Generating SRE Report...</span>
               ) : (

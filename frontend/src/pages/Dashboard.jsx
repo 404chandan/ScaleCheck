@@ -1,8 +1,127 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Plus, Trash2, Calendar, FileText, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Plus, Trash2, Calendar, FileText, ArrowRight, ShieldCheck, CheckSquare, Activity, ShieldAlert } from 'lucide-react';
+import { useUser } from '../userContext';
+
+// Architect Optimization Widget
+const ArchitectWidget = () => (
+  <div className="glass-card" style={{ marginBottom: '2rem', borderLeft: '4px solid var(--primary)' }}>
+    <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', color: 'var(--primary)', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      <CheckSquare size={16} />
+      <span>[ARCHITECTURAL_MITIGATION_WORKSPACE]</span>
+    </h3>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', fontSize: '0.85rem' }}>
+      <div>
+        <div style={{ fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.5rem', fontFamily: 'var(--font-mono)' }}>PENDING_DESIGN_DECISIONS:</div>
+        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.3rem', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
+          <li>[ ] Validate database connection pool scale limits</li>
+          <li>[ ] Deploy Redis cluster nodes inside secure VPC subnets</li>
+          <li>[ ] Configure RabbitMQ message queue retry handlers</li>
+        </ul>
+      </div>
+      <div>
+        <div style={{ fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.5rem', fontFamily: 'var(--font-mono)' }}>ACTIVE_BLUEPRINTS_STATE:</div>
+        <div style={{ fontFamily: 'var(--font-mono)', background: 'rgba(4,3,10,0.6)', border: '1px solid var(--surface-border)', borderRadius: 'var(--radius-sm)', padding: '0.6rem', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+          <div>CONFIG_ID: CLUSTER_CFG_0x8F92</div>
+          <div>COMPILATION: SUCCESSFUL [2.08s]</div>
+          <div>OPTIMIZATION_VECTORS: 3 paths identified</div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+// SRE Traffic Controller Widget
+const SreWidget = () => (
+  <div className="glass-card" style={{ marginBottom: '2rem', borderLeft: '4px solid var(--secondary)' }}>
+    <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', color: 'var(--secondary)', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+      <Activity size={16} />
+      <span>[SRE_TRAFFIC_TELEMETRY_FEED]</span>
+    </h3>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.2rem', fontSize: '0.85rem' }}>
+      <div style={{ background: 'rgba(4,3,10,0.5)', padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--surface-border)' }}>
+        <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>ACTIVE_STRESS_AGENT</div>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--secondary)', marginTop: '0.2rem' }}>NONE [IDLE]</div>
+      </div>
+      <div style={{ background: 'rgba(4,3,10,0.5)', padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--surface-border)' }}>
+        <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>HTTP_SOCKET_BUFFER</div>
+        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 'bold', color: '#fff', marginTop: '0.2rem' }}>64 KB [DEFAULT]</div>
+      </div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Link to="/loadtest" className="btn btn-primary" style={{ width: '100%', fontSize: '0.8rem', padding: '0.5rem', background: 'var(--secondary)' }}>
+          DEPLOY STRESS TEST AGENT
+        </Link>
+      </div>
+    </div>
+  </div>
+);
+
+// Compliance Auditor Checklist Widget
+const AuditorWidget = ({ reports }) => {
+  const latestReport = reports[0];
+  const hasLB = latestReport?.infrastructure.loadBalancer;
+  const hasCache = latestReport?.infrastructure.cache;
+  const hasReplicas = latestReport?.infrastructure.replicas;
+  const hasQueue = latestReport?.infrastructure.queue;
+
+  return (
+    <div className="glass-card" style={{ marginBottom: '2rem', borderLeft: '4px solid var(--success)' }}>
+      <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', color: 'var(--success)', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <ShieldAlert size={16} style={{ color: 'var(--success)' }} />
+        <span>[SYSTEM_SECURITY_AND_COMPLIANCE_MATRIX]</span>
+      </h3>
+      <div style={{ overflowX: 'auto' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', textAlign: 'left' }}>
+          <thead>
+            <tr style={{ borderBottom: '1px solid var(--surface-border)', color: 'var(--text-secondary)' }}>
+              <th style={{ padding: '0.5rem' }}>SECURITY_RULE</th>
+              <th style={{ padding: '0.5rem' }}>MEASURED_STATUS</th>
+              <th style={{ padding: '0.5rem' }}>SEVERITY</th>
+              <th style={{ padding: '0.5rem' }}>REMEDY_SCHEME</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+              <td style={{ padding: '0.5rem' }}>Traffic Redundancy (LB)</td>
+              <td style={{ padding: '0.5rem', color: hasLB ? 'var(--success)' : 'var(--warning)' }}>
+                {hasLB ? '[PASS] Balancer Active' : '[WARN] Single Endpoint'}
+              </td>
+              <td style={{ padding: '0.5rem' }}>MEDIUM</td>
+              <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Map routing table Nginx/ALB paths</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+              <td style={{ padding: '0.5rem' }}>Database Replication Factor</td>
+              <td style={{ padding: '0.5rem', color: hasReplicas ? 'var(--success)' : 'var(--critical)' }}>
+                {hasReplicas ? '[PASS] Clustered Replicas' : '[FAIL] Single DB Instance'}
+              </td>
+              <td style={{ padding: '0.5rem' }}>CRITICAL</td>
+              <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Configure read replicas set topology</td>
+            </tr>
+            <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
+              <td style={{ padding: '0.5rem' }}>Response Caching Layer</td>
+              <td style={{ padding: '0.5rem', color: hasCache ? 'var(--success)' : 'var(--text-muted)' }}>
+                {hasCache ? '[PASS] Redis Cache Active' : '[INFO] Uncached Architecture'}
+              </td>
+              <td style={{ padding: '0.5rem' }}>LOW</td>
+              <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Attach in-memory Redis cluster</td>
+            </tr>
+            <tr>
+              <td style={{ padding: '0.5rem' }}>Concurrency Spike Buffering</td>
+              <td style={{ padding: '0.5rem', color: hasQueue ? 'var(--success)' : 'var(--text-muted)' }}>
+                {hasQueue ? '[PASS] Queue Active' : '[INFO] Direct DB Pipelines'}
+              </td>
+              <td style={{ padding: '0.5rem' }}>LOW</td>
+              <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Deploy message broker (RabbitMQ/Kafka)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
 
 export default function Dashboard() {
+  const { user } = useUser();
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -81,6 +200,18 @@ export default function Dashboard() {
 
   return (
     <div>
+      {/* Dynamic Security greeting banner */}
+      {user && (
+        <div className="glass-card" style={{ marginBottom: '1.5rem', padding: '0.8rem 1.2rem', background: 'rgba(8,7,16,0.6)', borderLeft: `3px solid ${user.role === 'architect' ? 'var(--primary)' : user.role === 'sre' ? 'var(--secondary)' : 'var(--success)'}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+            USER_PRINCIPAL: <strong style={{ color: '#fff' }}>{user.title}</strong>
+          </span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+            CLEARANCE: <strong style={{ color: 'var(--text-primary)' }}>{user.clearance}</strong>
+          </span>
+        </div>
+      )}
+
       <div className="dashboard-header">
         <div>
           <h1 className="text-gradient" style={{ fontSize: '2.2rem' }}>SRE Architecture Dashboard</h1>
@@ -94,7 +225,7 @@ export default function Dashboard() {
 
       {error && (
         <div className="glass-card" style={{ background: 'var(--critical-bg)', borderColor: 'rgba(239, 68, 68, 0.2)', marginBottom: '2rem' }}>
-          <p style={{ color: 'var(--critical)', fontWeight: '600' }}>⚠️ Connection Error: {error}</p>
+          <p style={{ color: 'var(--critical)', fontWeight: '600' }}>[WARN] Connection Error: {error}</p>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>Make sure the backend server is running locally (default port 5000) or check the configuration.</p>
         </div>
       )}
@@ -129,6 +260,11 @@ export default function Dashboard() {
           <div className="stat-sub">Scores above 80/100</div>
         </div>
       </div>
+
+      {/* Dynamic Role-Based Mitigation Workspace Widgets */}
+      {user?.role === 'architect' && <ArchitectWidget />}
+      {user?.role === 'sre' && <SreWidget />}
+      {user?.role === 'auditor' && <AuditorWidget reports={reports} />}
 
       {/* Reports List */}
       <div>
