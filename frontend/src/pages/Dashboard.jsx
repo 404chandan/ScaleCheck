@@ -8,23 +8,23 @@ const ArchitectWidget = () => (
   <div className="glass-card" style={{ marginBottom: '2rem', borderLeft: '4px solid var(--primary)' }}>
     <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', color: 'var(--primary)', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
       <CheckSquare size={16} />
-      <span>[ARCHITECTURAL_MITIGATION_WORKSPACE]</span>
+      <span>[Architect Design Workspace]</span>
     </h3>
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', fontSize: '0.85rem' }}>
       <div>
-        <div style={{ fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.5rem', fontFamily: 'var(--font-mono)' }}>PENDING_DESIGN_DECISIONS:</div>
+        <div style={{ fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.5rem', fontFamily: 'var(--font-mono)' }}>Pending Tasks:</div>
         <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.3rem', color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>
-          <li>[ ] Validate database connection pool scale limits</li>
-          <li>[ ] Deploy Redis cluster nodes inside secure VPC subnets</li>
-          <li>[ ] Configure RabbitMQ message queue retry handlers</li>
+          <li>[ ] Check database connection pool limits</li>
+          <li>[ ] Move Redis cache to a secure private network</li>
+          <li>[ ] Set retry handler on RabbitMQ queue</li>
         </ul>
       </div>
       <div>
-        <div style={{ fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.5rem', fontFamily: 'var(--font-mono)' }}>ACTIVE_BLUEPRINTS_STATE:</div>
+        <div style={{ fontWeight: '700', color: 'var(--text-primary)', marginBottom: '0.5rem', fontFamily: 'var(--font-mono)' }}>Active Architecture Status:</div>
         <div style={{ fontFamily: 'var(--font-mono)', background: 'rgba(4,3,10,0.6)', border: '1px solid var(--surface-border)', borderRadius: 'var(--radius-sm)', padding: '0.6rem', fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
           <div>CONFIG_ID: CLUSTER_CFG_0x8F92</div>
-          <div>COMPILATION: SUCCESSFUL [2.08s]</div>
-          <div>OPTIMIZATION_VECTORS: 3 paths identified</div>
+          <div>Build Status: SUCCESSFUL [2.08s]</div>
+          <div>Improvements Found: 3 paths identified</div>
         </div>
       </div>
     </div>
@@ -36,20 +36,20 @@ const SreWidget = () => (
   <div className="glass-card" style={{ marginBottom: '2rem', borderLeft: '4px solid var(--secondary)' }}>
     <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', color: 'var(--secondary)', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
       <Activity size={16} />
-      <span>[SRE_TRAFFIC_TELEMETRY_FEED]</span>
+      <span>[Stress Testing Log]</span>
     </h3>
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.2rem', fontSize: '0.85rem' }}>
       <div style={{ background: 'rgba(4,3,10,0.5)', padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--surface-border)' }}>
-        <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>ACTIVE_STRESS_AGENT</div>
+        <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>Active Stress Test</div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--secondary)', marginTop: '0.2rem' }}>NONE [IDLE]</div>
       </div>
       <div style={{ background: 'rgba(4,3,10,0.5)', padding: '0.8rem', borderRadius: 'var(--radius-sm)', border: '1px solid var(--surface-border)' }}>
-        <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>HTTP_SOCKET_BUFFER</div>
+        <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>Socket Buffer Size</div>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 'bold', color: '#fff', marginTop: '0.2rem' }}>64 KB [DEFAULT]</div>
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/loadtest" className="btn btn-primary" style={{ width: '100%', fontSize: '0.8rem', padding: '0.5rem', background: 'var(--secondary)' }}>
-          DEPLOY STRESS TEST AGENT
+          Start Stress Test
         </Link>
       </div>
     </div>
@@ -68,23 +68,23 @@ const AuditorWidget = ({ reports }) => {
     <div className="glass-card" style={{ marginBottom: '2rem', borderLeft: '4px solid var(--success)' }}>
       <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', color: 'var(--success)', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
         <ShieldAlert size={16} style={{ color: 'var(--success)' }} />
-        <span>[SYSTEM_SECURITY_AND_COMPLIANCE_MATRIX]</span>
+        <span>[Security & System Best Practices]</span>
       </h3>
       <div style={{ overflowX: 'auto' }}>
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.8rem', fontFamily: 'var(--font-mono)', textAlign: 'left' }}>
           <thead>
             <tr style={{ borderBottom: '1px solid var(--surface-border)', color: 'var(--text-secondary)' }}>
-              <th style={{ padding: '0.5rem' }}>SECURITY_RULE</th>
-              <th style={{ padding: '0.5rem' }}>MEASURED_STATUS</th>
-              <th style={{ padding: '0.5rem' }}>SEVERITY</th>
-              <th style={{ padding: '0.5rem' }}>REMEDY_SCHEME</th>
+              <th style={{ padding: '0.5rem' }}>System Standard</th>
+              <th style={{ padding: '0.5rem' }}>Status</th>
+              <th style={{ padding: '0.5rem' }}>Importance</th>
+              <th style={{ padding: '0.5rem' }}>How to Fix</th>
             </tr>
           </thead>
           <tbody>
             <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
               <td style={{ padding: '0.5rem' }}>Traffic Redundancy (LB)</td>
               <td style={{ padding: '0.5rem', color: hasLB ? 'var(--success)' : 'var(--warning)' }}>
-                {hasLB ? '[PASS] Balancer Active' : '[WARN] Single Endpoint'}
+                {hasLB ? 'Pass: Load Balancer is active' : 'Warning: Single server endpoint'}
               </td>
               <td style={{ padding: '0.5rem' }}>MEDIUM</td>
               <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Map routing table Nginx/ALB paths</td>
@@ -92,7 +92,7 @@ const AuditorWidget = ({ reports }) => {
             <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
               <td style={{ padding: '0.5rem' }}>Database Replication Factor</td>
               <td style={{ padding: '0.5rem', color: hasReplicas ? 'var(--success)' : 'var(--critical)' }}>
-                {hasReplicas ? '[PASS] Clustered Replicas' : '[FAIL] Single DB Instance'}
+                {hasReplicas ? 'Pass: Database replication set up' : 'Fail: Single database instance'}
               </td>
               <td style={{ padding: '0.5rem' }}>CRITICAL</td>
               <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Configure read replicas set topology</td>
@@ -100,7 +100,7 @@ const AuditorWidget = ({ reports }) => {
             <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.03)' }}>
               <td style={{ padding: '0.5rem' }}>Response Caching Layer</td>
               <td style={{ padding: '0.5rem', color: hasCache ? 'var(--success)' : 'var(--text-muted)' }}>
-                {hasCache ? '[PASS] Redis Cache Active' : '[INFO] Uncached Architecture'}
+                {hasCache ? 'Pass: Redis cache is active' : 'Info: No cache configured'}
               </td>
               <td style={{ padding: '0.5rem' }}>LOW</td>
               <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Attach in-memory Redis cluster</td>
@@ -108,7 +108,7 @@ const AuditorWidget = ({ reports }) => {
             <tr>
               <td style={{ padding: '0.5rem' }}>Concurrency Spike Buffering</td>
               <td style={{ padding: '0.5rem', color: hasQueue ? 'var(--success)' : 'var(--text-muted)' }}>
-                {hasQueue ? '[PASS] Queue Active' : '[INFO] Direct DB Pipelines'}
+                {hasQueue ? 'Pass: Message queue is active' : 'Info: Direct database traffic'}
               </td>
               <td style={{ padding: '0.5rem' }}>LOW</td>
               <td style={{ padding: '0.5rem', color: 'var(--text-secondary)' }}>Deploy message broker (RabbitMQ/Kafka)</td>
@@ -192,7 +192,7 @@ export default function Dashboard() {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
         <div className="terminal-console" style={{ height: 'auto', padding: '2rem', textAlign: 'center' }}>
-          Initializing SRE Dashboard, loading system profiles...
+          Loading dashboard and system profiles...
         </div>
       </div>
     );
@@ -204,38 +204,38 @@ export default function Dashboard() {
       {user && (
         <div className="glass-card" style={{ marginBottom: '1.5rem', padding: '0.8rem 1.2rem', background: 'rgba(8,7,16,0.6)', borderLeft: `3px solid ${user.role === 'architect' ? 'var(--primary)' : user.role === 'sre' ? 'var(--secondary)' : 'var(--success)'}`, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-            USER_PRINCIPAL: <strong style={{ color: '#fff' }}>{user.title}</strong>
+            User Role: <strong style={{ color: '#fff' }}>{user.title}</strong>
           </span>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-            CLEARANCE: <strong style={{ color: 'var(--text-primary)' }}>{user.clearance}</strong>
+            Access Level: <strong style={{ color: 'var(--text-primary)' }}>{user.clearance}</strong>
           </span>
         </div>
       )}
 
       <div className="dashboard-header">
         <div>
-          <h1 className="text-gradient" style={{ fontSize: '2.2rem' }}>SRE Architecture Dashboard</h1>
-          <p style={{ color: 'var(--text-secondary)' }}>Predict backend scaling risks, profile APIs, and review system design bottlenecks.</p>
+          <h1 className="text-gradient" style={{ fontSize: '2.2rem' }}>System Scaling & Design Dashboard</h1>
+          <p style={{ color: 'var(--text-secondary)' }}>Estimate scaling risks, test APIs, and discover system design bottlenecks.</p>
         </div>
         <Link to="/create" className="btn btn-primary">
           <Plus size={16} />
-          <span>New SRE Review</span>
+          <span>New Design Review</span>
         </Link>
       </div>
 
       {error && (
         <div className="glass-card" style={{ background: 'var(--critical-bg)', borderColor: 'rgba(239, 68, 68, 0.2)', marginBottom: '2rem' }}>
-          <p style={{ color: 'var(--critical)', fontWeight: '600' }}>[WARN] Connection Error: {error}</p>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>Make sure the backend server is running locally (default port 5000) or check the configuration.</p>
+          <p style={{ color: 'var(--critical)', fontWeight: '600' }}>Error Connecting: {error}</p>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>Please check if the backend server is running.</p>
         </div>
       )}
 
       {/* Stats Cards */}
       <div className="stats-grid">
         <div className="glass-card stat-card">
-          <div className="stat-title">Total Analyses</div>
+          <div className="stat-title">Total Reports</div>
           <div className="stat-val text-cyan-gradient">{stats.total}</div>
-          <div className="stat-sub">Profiled system topologies</div>
+          <div className="stat-sub">Designs analyzed</div>
         </div>
 
         <div className="glass-card stat-card">
@@ -243,21 +243,21 @@ export default function Dashboard() {
           <div className="stat-val" style={{ color: stats.avgScore >= 80 ? 'var(--success)' : stats.avgScore >= 60 ? 'var(--warning)' : 'var(--critical)' }}>
             {stats.avgScore} <span style={{ fontSize: '1.2rem' }}>/100</span>
           </div>
-          <div className="stat-sub">Across all infrastructures</div>
+          <div className="stat-sub">Across all architectures</div>
         </div>
 
         <div className="glass-card stat-card">
-          <div className="stat-title">Unstable Systems</div>
+          <div className="stat-title">Weak Architectures</div>
           <div className="stat-val" style={{ color: stats.criticalCount > 0 ? 'var(--critical)' : 'var(--text-secondary)' }}>
             {stats.criticalCount}
           </div>
-          <div className="stat-sub">Scores below 60/100</div>
+          <div className="stat-sub">Below 60/100</div>
         </div>
 
         <div className="glass-card stat-card">
-          <div className="stat-title">Production Ready</div>
+          <div className="stat-title">Stable Architectures</div>
           <div className="stat-val" style={{ color: 'var(--success)' }}>{stats.healthyCount}</div>
-          <div className="stat-sub">Scores above 80/100</div>
+          <div className="stat-sub">Above 80/100</div>
         </div>
       </div>
 
@@ -269,19 +269,19 @@ export default function Dashboard() {
       {/* Reports List */}
       <div>
         <div className="reports-list-header">
-          <h2 style={{ fontSize: '1.4rem' }}>Recent System Design Reviews</h2>
+          <h2 style={{ fontSize: '1.4rem' }}>Recent System Reviews</h2>
         </div>
 
         {reports.length === 0 ? (
           <div className="glass-card" style={{ padding: '3rem', textAlign: 'center' }}>
             <FileText size={48} style={{ color: 'var(--text-muted)', marginBottom: '1rem' }} />
-            <h3 style={{ marginBottom: '0.5rem' }}>No scaling analyses yet</h3>
+            <h3 style={{ marginBottom: '0.5rem' }}>No reviews created yet</h3>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.5rem', maxWidth: '400px', margin: '0 auto 1.5rem' }}>
-              Create an analysis profile of your application, enter expected traffic, and get SRE recommendation feedback.
+              Create a profile of your app, specify your target traffic, and get instant design feedback.
             </p>
             <Link to="/create" className="btn btn-primary">
               <Plus size={16} />
-              <span>Launch First Analysis</span>
+              <span>Start First Review</span>
             </Link>
           </div>
         ) : (

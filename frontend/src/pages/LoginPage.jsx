@@ -23,13 +23,13 @@ export default function LoginPage() {
   }, [user, navigate]);
 
   const authSequence = [
-    { text: "CRON: Checking socket handshake pipeline...", time: 300 },
-    { text: "[ OK ] Socket stream initialized at 127.0.0.1:5000", time: 400 },
-    { text: "AUTH: Authenticating credentials payload encryption...", time: 300 },
-    { text: "[ OK ] Token decryption hash matches level configuration key", time: 400 },
-    { text: "NODE: Fetching security credentials profile details...", time: 300 },
-    { text: "[ OK ] Active authorizations loaded successfully", time: 300 },
-    { text: "[ ACCESS GRANTED ] Core desk dashboard loaded. Forking terminal user session...", time: 500 }
+    { text: "Connecting to server...", time: 300 },
+    { text: "[ OK ] Server connection established.", time: 400 },
+    { text: "Verifying credentials...", time: 300 },
+    { text: "[ OK ] Credentials verified successfully.", time: 400 },
+    { text: "Loading your profile data...", time: 300 },
+    { text: "[ OK ] Profile loaded successfully.", time: 300 },
+    { text: "[ ACCESS GRANTED ] Redirecting to dashboard...", time: 500 }
   ];
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export default function LoginPage() {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     if (!username.trim() || !password.trim()) {
-      alert("Credentials tokens cannot be empty.");
+      alert("Username and password cannot be empty.");
       return;
     }
     
@@ -87,7 +87,7 @@ export default function LoginPage() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.8rem' }}>
           <Shield className="logo-icon" size={24} style={{ color: 'var(--primary)' }} />
-          <h2 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.2rem', tracking: '0.05em' }}>[SECURE_AUTH_NODE_PORTAL]</h2>
+          <h2 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.2rem', tracking: '0.05em' }}>[Log In]</h2>
         </div>
 
         {!isAuthenticating ? (
@@ -96,7 +96,7 @@ export default function LoginPage() {
             <div className="form-group">
               <label htmlFor="auth-user" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <User size={12} />
-                <span>USER_IDENTIFIER</span>
+                <span>Username</span>
               </label>
               <input
                 id="auth-user"
@@ -112,7 +112,7 @@ export default function LoginPage() {
             <div className="form-group">
               <label htmlFor="auth-key" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                 <Key size={12} />
-                <span>DECRYPT_TOKEN_KEY</span>
+                <span>Password</span>
               </label>
               <input
                 id="auth-key"
@@ -126,7 +126,7 @@ export default function LoginPage() {
             </div>
 
             <div className="form-group">
-              <label>TARGET_PERMISSION_SCOPE</label>
+              <label>Demo Role</label>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.5rem', marginTop: '0.2rem' }}>
                 <button
                   type="button"
@@ -174,13 +174,13 @@ export default function LoginPage() {
             </div>
 
             <button type="submit" className="btn btn-primary" style={{ marginTop: '0.5rem' }}>
-              <span>DECRYPT & CONNECT</span>
+              <span>Log In</span>
               <ArrowRight size={16} />
             </button>
 
             {/* Presets Helper */}
             <div style={{ marginTop: '1rem', borderTop: '1px solid var(--surface-border)', paddingTop: '1rem' }}>
-              <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>PRESET_ACCOUNTS_LOADER:</div>
+              <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Preset Demo Accounts:</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                 <button 
                   type="button"
@@ -218,7 +218,7 @@ export default function LoginPage() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--success)', fontSize: '0.8rem', fontWeight: 'bold' }}>
               <Terminal size={14} />
-              <span>AUTHENTICATION PIPELINE DECRYPTION LOGS:</span>
+              <span>Authentication Logs:</span>
             </div>
 
             <div style={{ 
@@ -253,7 +253,7 @@ export default function LoginPage() {
             </div>
 
             <div style={{ textAlign: 'center', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-              establishing encrypted context tunnel to root clusters...
+              establishing secure connection...
             </div>
           </div>
         )}

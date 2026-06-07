@@ -37,13 +37,13 @@ export default function BottleneckList({ bottlenecks = [], aiRecommendations = [
       <div>
         <h3 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <AlertTriangle style={{ color: 'var(--warning)' }} size={20} />
-          <span>Detected Architectural Risks ({bottlenecks.length})</span>
+          <span>Scaling Risks Found ({bottlenecks.length})</span>
         </h3>
         
         {bottlenecks.length === 0 ? (
           <div className="glass-card" style={{ textAlign: 'center', color: 'var(--success)', padding: '2rem' }}>
-            <p style={{ fontWeight: '600' }}>[PASS] No critical bottlenecks detected!</p>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>Your system parameters fit within standard scaling capabilities.</p>
+            <p style={{ fontWeight: '600' }}>Pass: No major scaling risks found!</p>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>Your setup looks solid and can handle the expected traffic.</p>
           </div>
         ) : (
           <div className="bottleneck-card-list">
@@ -74,7 +74,7 @@ export default function BottleneckList({ bottlenecks = [], aiRecommendations = [
                     <div className="bottleneck-body">
                       <p className="bottleneck-description">{b.description}</p>
                       <div className="bottleneck-mitigation">
-                        <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '0.25rem' }}>SRE Recommended Action:</strong>
+                        <strong style={{ color: 'var(--text-primary)', display: 'block', marginBottom: '0.25rem' }}>Recommended Action:</strong>
                         <span style={{ color: 'var(--text-secondary)' }}>{b.mitigation}</span>
                       </div>
                     </div>
@@ -91,7 +91,7 @@ export default function BottleneckList({ bottlenecks = [], aiRecommendations = [
         <div>
           <h3 style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Sparkles style={{ color: 'var(--primary)' }} size={20} />
-            <span>AI Recommendation Action Plan ({aiRecommendations.length})</span>
+            <span>Step-by-Step Improvement Plan ({aiRecommendations.length})</span>
           </h3>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>

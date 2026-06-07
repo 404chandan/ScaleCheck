@@ -141,7 +141,7 @@ export default function TrafficSimulator({ simulationData, initialRps = 100 }) {
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Gauge style={{ color: 'var(--secondary)' }} size={20} />
-          <span>Interactive Traffic Simulator</span>
+          <span>Interactive Load Simulator</span>
         </h3>
         <span style={{ 
           fontFamily: 'var(--font-mono)', 
@@ -151,18 +151,18 @@ export default function TrafficSimulator({ simulationData, initialRps = 100 }) {
           padding: '0.1rem 0.5rem', 
           borderRadius: '4px' 
         }}>
-          Capacity Threshold: {capacity.current} RPS
+          Baseline Limit: {capacity.current} RPS
         </span>
       </div>
 
       <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-        Slide the traffic scale to simulate concurrency and witness how the baseline system degrades compared to the optimized target architecture.
+        Adjust the slider to simulate traffic and see how your current system compares to the recommended setup under load.
       </p>
 
       {/* Slider Control */}
       <div className="simulator-slider-group" style={{ margin: '1rem 0' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: '700', fontFamily: 'var(--font-mono)' }}>
-          <span>Load Intensity</span>
+          <span>Simulated Requests</span>
           <span className="text-cyan-gradient" style={{ fontSize: '1.2rem' }}>{simRps} RPS</span>
         </div>
         <input 
@@ -188,26 +188,26 @@ export default function TrafficSimulator({ simulationData, initialRps = 100 }) {
         <div className="glass-card" style={{ background: 'rgba(239, 68, 68, 0.02)', borderColor: simRps > capacity.current ? 'rgba(239, 68, 68, 0.15)' : 'var(--surface-border)' }}>
           <h4 style={{ color: '#ef4444', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <AlertTriangle size={14} />
-            <span>Current Baseline</span>
+            <span>Your Current Setup</span>
           </h4>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             <div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Predicted Latency</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Response Time</span>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.5rem', fontWeight: '700', color: currentMetrics.currentLat > 1000 ? '#ef4444' : currentMetrics.currentLat > 200 ? '#f59e0b' : '#fff' }}>
                 {currentMetrics.currentLat} <span style={{ fontSize: '0.85rem' }}>ms</span>
               </div>
             </div>
             
             <div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Failure Rate</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Error Rate</span>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.5rem', fontWeight: '700', color: currentMetrics.currentErr > 5 ? '#ef4444' : '#fff' }}>
                 {currentMetrics.currentErr}%
               </div>
             </div>
 
             <div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Simulated Score</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Health Score</span>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.5rem', fontWeight: '700', color: currentMetrics.currentScore > 75 ? 'var(--success)' : currentMetrics.currentScore > 50 ? 'var(--warning)' : 'var(--critical)' }}>
                 {currentMetrics.currentScore} <span style={{ fontSize: '0.85rem' }}>/100</span>
               </div>
@@ -219,26 +219,26 @@ export default function TrafficSimulator({ simulationData, initialRps = 100 }) {
         <div className="glass-card" style={{ background: 'rgba(16, 185, 129, 0.02)', borderColor: 'rgba(16, 185, 129, 0.15)' }}>
           <h4 style={{ color: '#10b981', fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <CheckCircle size={14} />
-            <span>Target Optimized</span>
+            <span>Recommended Setup</span>
           </h4>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
             <div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Predicted Latency</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Response Time</span>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.5rem', fontWeight: '700', color: '#10b981' }}>
                 {currentMetrics.optLat} <span style={{ fontSize: '0.85rem' }}>ms</span>
               </div>
             </div>
 
             <div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Failure Rate</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Error Rate</span>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.5rem', fontWeight: '700', color: '#10b981' }}>
                 {currentMetrics.optErr}%
               </div>
             </div>
 
             <div>
-              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Simulated Score</span>
+              <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Health Score</span>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.5rem', fontWeight: '700', color: '#10b981' }}>
                 {currentMetrics.optScore} <span style={{ fontSize: '0.85rem' }}>/100</span>
               </div>

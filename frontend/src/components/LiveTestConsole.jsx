@@ -228,19 +228,19 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
             <div className="glass-card" style={{ background: 'var(--critical-bg)', borderColor: 'rgba(239, 68, 68, 0.2)', padding: '0.8rem', display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
               <ShieldAlert size={16} style={{ color: 'var(--critical)' }} />
               <span style={{ fontSize: '0.75rem', color: 'var(--critical)', fontFamily: 'var(--font-mono)' }}>
-                [ERR_CLEARANCE_REQUIRED] CONCURRENCY STRESS INJECTION REQUIRES LEVEL_8 SRE CONTEXT. VIEW MODE ONLY.
+                Access Restricted: Running live stress tests requires SRE permissions. View-only mode.
               </span>
             </div>
           ) : (
             !isRunning ? (
               <button className="btn btn-primary" onClick={startTest} style={{ flex: 1 }}>
                 <Play size={16} />
-                <span>Launch Stress Test</span>
+                <span>Start Stress Test</span>
               </button>
             ) : (
               <button className="btn btn-danger" onClick={cancelTest} style={{ flex: 1 }}>
                 <Square size={16} />
-                <span>Abort Load Test</span>
+                <span>Stop Stress Test</span>
               </button>
             )
           )}
@@ -251,10 +251,10 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
       <div className="live-test-layout" style={{ marginTop: '0.5rem' }}>
         {/* Terminal log */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <div style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Log Terminal</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Console Logs</div>
           <div className="terminal-console">
             {logs.length === 0 ? (
-              <span style={{ color: 'var(--text-muted)' }}>Console idle. Launch a load test to observe SRE output...</span>
+              <span style={{ color: 'var(--text-muted)' }}>Console idle. Start a stress test to see live logs...</span>
             ) : (
               logs.map((log, index) => (
                 <div key={index} className={`terminal-line ${log.type}`}>
@@ -269,10 +269,10 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
 
         {/* Real-time Chart */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-          <div style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Live Metric Stream</div>
+          <div style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Live Chart</div>
           <div className="glass-card" style={{ height: '320px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
             {chartDataPoints.length === 0 ? (
-              <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Waiting for chart data stream...</span>
+              <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Waiting for test to start...</span>
             ) : (
               <div style={{ width: '100%', height: '100%' }}>
                 <Line data={liveChartData} options={chartOptions} />
@@ -287,23 +287,23 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
         <div className="glass-card" style={{ background: 'var(--success-bg)', borderColor: 'rgba(16, 185, 129, 0.2)' }}>
           <h4 style={{ color: 'var(--success)', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.8rem' }}>
             <CheckCircleIcon />
-            <span>Load Test Completed Successfully</span>
+            <span>Stress Test Completed</span>
           </h4>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1rem', fontSize: '0.85rem' }}>
             <div>
-              <span style={{ color: 'var(--text-secondary)' }}>Avg Throughput</span>
+              <span style={{ color: 'var(--text-secondary)' }}>Throughput (RPS)</span>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.2rem', fontWeight: '700' }}>{Math.round(finalResult.throughput)} RPS</div>
             </div>
             <div>
-              <span style={{ color: 'var(--text-secondary)' }}>Avg Latency</span>
+              <span style={{ color: 'var(--text-secondary)' }}>Response Time</span>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.2rem', fontWeight: '700' }}>{Math.round(finalResult.averageLatency)} ms</div>
             </div>
             <div>
-              <span style={{ color: 'var(--text-secondary)' }}>99th Percentile</span>
+              <span style={{ color: 'var(--text-secondary)' }}>99% Response Time</span>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.2rem', fontWeight: '700' }}>{Math.round(finalResult.p99Latency)} ms</div>
             </div>
             <div>
-              <span style={{ color: 'var(--text-secondary)' }}>Failure Rate</span>
+              <span style={{ color: 'var(--text-secondary)' }}>Error Rate</span>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.2rem', fontWeight: '700', color: finalResult.failureRate > 0 ? 'var(--critical)' : 'var(--success)' }}>{finalResult.failureRate}%</div>
             </div>
           </div>

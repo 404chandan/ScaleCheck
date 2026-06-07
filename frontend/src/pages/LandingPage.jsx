@@ -290,7 +290,7 @@ export default function LandingPage() {
   (___/ \\___)(__)(__)____)(____)\\___)(_) (_)(____)\\___)(_) (_)`}
         </pre>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginTop: '1rem', letterSpacing: '0.05em', fontFamily: 'var(--font-mono)' }}>
-          [DEPLOYMENT BENCHMARK & MULTI-TIER ARCHITECTURAL ANALYSIS ENGINE]
+          [System Design & Load Testing Analyzer]
         </p>
       </div>
 
@@ -302,7 +302,7 @@ export default function LandingPage() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem' }}>
             <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--success)' }}>
               <Terminal size={16} />
-              <span>DIAGNOSTICS SHELL CONSOLE</span>
+              <span>Console Terminal</span>
             </h4>
             <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--success)', boxShadow: '0 0 8px var(--success)' }} />
           </div>
@@ -345,16 +345,16 @@ export default function LandingPage() {
       {/* Feature Checklist Cards */}
       <div>
         <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.2rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem' }}>
-          [CORE_ENGINE_CAPABILITIES]
+          [App Capabilities]
         </h3>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
           
           <div className="glass-card" style={{ display: 'flex', gap: '1rem' }}>
             <Cpu size={24} style={{ color: 'var(--primary)', flexShrink: 0 }} />
             <div>
-              <h4 style={{ fontFamily: 'var(--font-mono)', fontSize: '0.95rem', marginBottom: '0.25rem' }}>Multi-Tier Profiler</h4>
+              <h4 style={{ fontFamily: 'var(--font-mono)', fontSize: '0.95rem', marginBottom: '0.25rem' }}>System Design Reviewer</h4>
               <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                Inspect scaling constraints across database engines, backend structures, APIs, and load configurations.
+                Check your database configurations, backend framework setup, and load settings to find scaling issues.
               </p>
             </div>
           </div>
@@ -362,9 +362,9 @@ export default function LandingPage() {
           <div className="glass-card" style={{ display: 'flex', gap: '1rem' }}>
             <Activity size={24} style={{ color: 'var(--secondary)', flexShrink: 0 }} />
             <div>
-              <h4 style={{ fontFamily: 'var(--font-mono)', fontSize: '0.95rem', marginBottom: '0.25rem' }}>Live Stress Injector</h4>
+              <h4 style={{ fontFamily: 'var(--font-mono)', fontSize: '0.95rem', marginBottom: '0.25rem' }}>Traffic Simulator</h4>
               <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                Directly bench HTTP connections with high concurrency threads and track response latency spikes.
+                Simulate thousands of requests visiting your API to see how response times change under load.
               </p>
             </div>
           </div>
@@ -372,9 +372,9 @@ export default function LandingPage() {
           <div className="glass-card" style={{ display: 'flex', gap: '1rem' }}>
             <Database size={24} style={{ color: 'var(--success)', flexShrink: 0 }} />
             <div>
-              <h4 style={{ fontFamily: 'var(--font-mono)', fontSize: '0.95rem', marginBottom: '0.25rem' }}>Topology Visualizer</h4>
+              <h4 style={{ fontFamily: 'var(--font-mono)', fontSize: '0.95rem', marginBottom: '0.25rem' }}>Architecture Planner</h4>
               <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                Render dynamic system layout maps including caches, sharded clusters, queues, and instances.
+                Visualize your server layouts, including database replica nodes, Redis caches, and message queues.
               </p>
             </div>
           </div>
@@ -386,11 +386,11 @@ export default function LandingPage() {
       <div className="glass-card" style={{ background: 'rgba(20, 18, 38, 0.4)', padding: '2rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.5rem', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem' }}>
           <Shield style={{ color: 'var(--primary)' }} size={20} />
-          <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem' }}>[SECURE_ACCESS_SIGN_ON_PORTAL]</h3>
+          <h3 style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem' }}>[Select a Demo Role to Log In]</h3>
         </div>
         
         <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '2rem' }}>
-          Select a system role node below to directly initialize a localized session profile. Each persona maps specific access levels and modifies dashboard utilities.
+          Select a demo role below to explore the dashboard. Each role has different permissions to simulate real-world developer scenarios.
         </p>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
@@ -400,16 +400,16 @@ export default function LandingPage() {
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px dashed var(--surface-border)', paddingBottom: '0.4rem', marginBottom: '0.5rem' }}>
                 <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', fontSize: '0.85rem', color: 'var(--text-primary)' }}>ROLE: ARCHITECT</span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--primary)', border: '1px solid var(--primary)', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>LVL_9</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--primary)', border: '1px solid var(--primary)', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>LEVEL 9</span>
               </div>
               <ul style={{ listStyle: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
                 <li>NODE: {personas.architect.node}</li>
-                <li>PERMIT: Write System Architecture</li>
-                <li>RESTRICT: Load Injection [Read Only]</li>
+                <li>PERMIT: Edit Architecture Map</li>
+                <li>RESTRICT: View-Only Stress Tester</li>
               </ul>
             </div>
             <button className="btn btn-primary" onClick={() => handleQuickLogin('architect')} style={{ width: '100%', fontSize: '0.8rem', padding: '0.4rem' }}>
-              LAUNCH ARCHITECT CONSOLE
+              Log in as Architect
             </button>
           </div>
 
@@ -417,17 +417,17 @@ export default function LandingPage() {
           <div className="glass-card" style={{ borderColor: 'var(--surface-border)', display: 'flex', flexDirection: 'column', justifyBetween: 'space-between', gap: '1rem' }}>
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px dashed var(--surface-border)', paddingBottom: '0.4rem', marginBottom: '0.5rem' }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', fontSize: '0.85rem', color: 'var(--text-primary)' }}>ROLE: SRE_ENGINEER</span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--secondary)', border: '1px solid var(--secondary)', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>LVL_8</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', fontSize: '0.85rem', color: 'var(--text-primary)' }}>ROLE: SRE ENGINEER</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--secondary)', border: '1px solid var(--secondary)', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>LEVEL 8</span>
               </div>
               <ul style={{ listStyle: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
                 <li>NODE: {personas.sre.node}</li>
-                <li>PERMIT: Launch Traffic Stress Tests</li>
-                <li>RESTRICT: Edit Topology [Read Only]</li>
+                <li>PERMIT: Run Live Stress Tests</li>
+                <li>RESTRICT: View-Only Architecture Map</li>
               </ul>
             </div>
             <button className="btn btn-primary" onClick={() => handleQuickLogin('sre')} style={{ width: '100%', fontSize: '0.8rem', padding: '0.4rem', background: 'var(--secondary)' }}>
-              LAUNCH SRE CONSOLE
+              Log in as SRE
             </button>
           </div>
 
@@ -435,17 +435,17 @@ export default function LandingPage() {
           <div className="glass-card" style={{ borderColor: 'var(--surface-border)', display: 'flex', flexDirection: 'column', justifyBetween: 'space-between', gap: '1rem' }}>
             <div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px dashed var(--surface-border)', paddingBottom: '0.4rem', marginBottom: '0.5rem' }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', fontSize: '0.85rem', color: 'var(--text-primary)' }}>ROLE: AUDITOR_CORE</span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--success)', border: '1px solid var(--success)', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>LVL_5</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', fontSize: '0.85rem', color: 'var(--text-primary)' }}>ROLE: AUDITOR</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.7rem', color: 'var(--success)', border: '1px solid var(--success)', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>LEVEL 5</span>
               </div>
               <ul style={{ listStyle: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
                 <li>NODE: {personas.auditor.node}</li>
-                <li>PERMIT: Audit Compliance Checklist</li>
-                <li>RESTRICT: Core Modifications [Read Only]</li>
+                <li>PERMIT: View Best Practices Checklist</li>
+                <li>RESTRICT: View-Only Planner & Tester</li>
               </ul>
             </div>
             <button className="btn btn-primary" onClick={() => handleQuickLogin('auditor')} style={{ width: '100%', fontSize: '0.8rem', padding: '0.4rem', background: 'var(--success)' }}>
-              LAUNCH AUDITOR CONSOLE
+              Log in as Auditor
             </button>
           </div>
 
@@ -453,7 +453,7 @@ export default function LandingPage() {
 
         <div style={{ textAlign: 'center', marginTop: '2rem' }}>
           <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-            Or launch the manual credential form directly by heading to the <Link to="/login" style={{ color: 'var(--primary)' }}>Authentication Shell</Link>.
+            Or go to the <Link to="/login" style={{ color: 'var(--primary)' }}>Login Page</Link> to type credentials manually.
           </span>
         </div>
       </div>

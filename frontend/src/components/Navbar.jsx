@@ -43,7 +43,7 @@ export default function Navbar() {
             display: 'inline-block',
             animation: 'pulse 2s infinite'
           }} />
-          <span>SESSION: <strong style={{ color: '#fff' }}>{user.clearance}</strong></span>
+          <span>ROLE: <strong style={{ color: '#fff' }}>{user.title}</strong></span>
           <span style={{ color: 'var(--text-muted)' }}>|</span>
           <span>IP: <strong style={{ color: '#fff' }}>{user.ipAddress}</strong></span>
           <span style={{ color: 'var(--text-muted)' }}>|</span>
@@ -66,7 +66,7 @@ export default function Navbar() {
               <NavLink to="/create" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <FileSpreadsheet size={16} />
-                  <span>Topology Config <span style={{ fontSize: '0.7rem', opacity: 0.8, color: 'var(--primary)', fontFamily: 'var(--font-mono)' }}>[L9]</span></span>
+                  <span>Architecture Planner</span>
                 </div>
               </NavLink>
             </li>
@@ -74,7 +74,7 @@ export default function Navbar() {
               <NavLink to="/loadtest" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <Activity size={16} />
-                  <span>Stress Injector <span style={{ fontSize: '0.7rem', opacity: 0.8, color: 'var(--secondary)', fontFamily: 'var(--font-mono)' }}>[L8]</span></span>
+                  <span>Stress Tester</span>
                 </div>
               </NavLink>
             </li>
@@ -94,7 +94,7 @@ export default function Navbar() {
                 }}
               >
                 <LogOut size={16} />
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>[TERMINATE]</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>[Log Out]</span>
               </button>
             </li>
           </>
@@ -104,7 +104,7 @@ export default function Navbar() {
               <NavLink to="/landing" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <Terminal size={16} />
-                  <span>Console Landing</span>
+                  <span>Home</span>
                 </div>
               </NavLink>
             </li>
@@ -112,7 +112,7 @@ export default function Navbar() {
               <NavLink to="/login" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <LogIn size={16} />
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>[ESTABLISH_SESSION]</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>[Log In]</span>
                 </div>
               </NavLink>
             </li>

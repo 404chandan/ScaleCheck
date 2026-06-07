@@ -109,13 +109,13 @@ export default function CreateAnalysis() {
         <div className="glass-card" style={{ marginBottom: '1.5rem', background: 'var(--critical-bg)', borderColor: 'rgba(239, 68, 68, 0.2)', padding: '0.8rem 1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <ShieldAlert size={16} style={{ color: 'var(--critical)' }} />
           <span style={{ fontSize: '0.8rem', color: 'var(--critical)', fontFamily: 'var(--font-mono)' }}>
-            [READ_ONLY] TOPOLOGY CONFIGURATION PRESET BY PRINCIPAL ARCHITECT. EDITS RESTRICTED FOR ROLE: {user?.role ? user.role.toUpperCase() : 'GUEST'}.
+            [Read Only] This configuration is set by the Principal Architect. You cannot make edits as an: {user?.role ? user.role.toUpperCase() : 'GUEST'}.
           </span>
         </div>
       )}
       <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
-        <h1 className="text-gradient" style={{ fontSize: '2rem' }}>Configure Architecture Profile</h1>
-        <p style={{ color: 'var(--text-secondary)' }}>Provide system parameters. The SRE engine will map risk indices and failure bottlenecks.</p>
+        <h1 className="text-gradient" style={{ fontSize: '2rem' }}>Configure Your Architecture</h1>
+        <p style={{ color: 'var(--text-secondary)' }}>Enter your system details below. We will analyze scaling risks and potential bottlenecks.</p>
       </div>
 
       {/* Progress Indicator */}
@@ -133,7 +133,7 @@ export default function CreateAnalysis() {
         {/* STEP 1: GENERAL INFO */}
         {step === 1 && (
           <div className="form-section">
-            <h3 style={{ borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '0.5rem' }}>Step 1: Application Profile</h3>
+            <h3 style={{ borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '0.5rem' }}>Step 1: App Profile</h3>
             
             <div className="form-group">
               <label htmlFor="sys-name">Application Name</label>
@@ -149,7 +149,7 @@ export default function CreateAnalysis() {
 
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="sys-backend">Backend Technology Stack</label>
+                <label htmlFor="sys-backend">Backend Technology</label>
                 <select 
                   id="sys-backend" 
                   className="form-control" 
@@ -166,7 +166,7 @@ export default function CreateAnalysis() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="sys-db">Primary Database</label>
+                <label htmlFor="sys-db">Database</label>
                 <select 
                   id="sys-db" 
                   className="form-control" 
@@ -187,11 +187,11 @@ export default function CreateAnalysis() {
         {/* STEP 2: TRAFFIC PROFILE */}
         {step === 2 && (
           <div className="form-section">
-            <h3 style={{ borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '0.5rem' }}>Step 2: Load & Growth Predictions</h3>
+            <h3 style={{ borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '0.5rem' }}>Step 2: Expected Traffic</h3>
             
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="traffic-rps">Peak Throughput (req/sec)</label>
+                <label htmlFor="traffic-rps">Peak Request Rate (requests per second)</label>
                 <input 
                   id="traffic-rps" 
                   type="number" 
@@ -203,7 +203,7 @@ export default function CreateAnalysis() {
               </div>
 
               <div className="form-group">
-                <label htmlFor="traffic-users">Concurrent Active Users</label>
+                <label htmlFor="traffic-users">Active Users at the Same Time</label>
                 <input 
                   id="traffic-users" 
                   type="number" 
@@ -216,7 +216,7 @@ export default function CreateAnalysis() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="traffic-growth">Expected 12-Month Traffic Growth (%)</label>
+              <label htmlFor="traffic-growth">Expected 12-Month Growth (%)</label>
               <input 
                 id="traffic-growth" 
                 type="number" 
@@ -234,7 +234,7 @@ export default function CreateAnalysis() {
         {step === 3 && (
           <div className="form-section">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem' }}>
-              <h3>Step 3: API Endpoints ({endpoints.length})</h3>
+              <h3>Step 3: API Paths ({endpoints.length})</h3>
               <button className="btn btn-secondary" onClick={addEndpoint} style={{ padding: '0.4rem 0.8rem', fontSize: '0.8rem' }}>
                 <Plus size={14} /> Add Endpoint
               </button>
@@ -304,8 +304,8 @@ export default function CreateAnalysis() {
         {/* STEP 4: ARCHITECTURE TOGGLES */}
         {step === 4 && (
           <div className="form-section">
-            <h3 style={{ borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '0.5rem' }}>Step 4: Active Architecture Topology</h3>
-            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Check which scaling strategies are ALREADY implemented in your baseline setup.</p>
+            <h3 style={{ borderBottom: '1px solid var(--surface-border)', paddingBottom: '0.5rem', marginBottom: '0.5rem' }}>Step 4: Infrastructure Setup</h3>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Select which of these are already set up in your system.</p>
             
             <div className="toggle-grid">
               
@@ -321,7 +321,7 @@ export default function CreateAnalysis() {
                 />
                 <div className="toggle-label">
                   <span className="toggle-title">Load Balancer</span>
-                  <span className="toggle-desc">Nginx, ALB, or Envoy active</span>
+                  <span className="toggle-desc">e.g. Nginx, AWS ALB, or Envoy</span>
                 </div>
               </div>
 
@@ -336,8 +336,8 @@ export default function CreateAnalysis() {
                   onChange={() => {}}
                 />
                 <div className="toggle-label">
-                  <span className="toggle-title">In-Memory Cache</span>
-                  <span className="toggle-desc">Redis or Memcached enabled</span>
+                  <span className="toggle-title">Cache</span>
+                  <span className="toggle-desc">e.g. Redis or Memcached</span>
                 </div>
               </div>
 
@@ -352,8 +352,8 @@ export default function CreateAnalysis() {
                   onChange={() => {}}
                 />
                 <div className="toggle-label">
-                  <span className="toggle-title">DB Replication</span>
-                  <span className="toggle-desc">Read replicas or replica set</span>
+                  <span className="toggle-title">Database Replicas</span>
+                  <span className="toggle-desc">e.g. Postgres Read Replicas</span>
                 </div>
               </div>
 
@@ -368,8 +368,8 @@ export default function CreateAnalysis() {
                   onChange={() => {}}
                 />
                 <div className="toggle-label">
-                  <span className="toggle-title">DB Sharding</span>
-                  <span className="toggle-desc">Distributed cluster shards</span>
+                  <span className="toggle-title">Database Sharding</span>
+                  <span className="toggle-desc">Splitting database into multiple servers</span>
                 </div>
               </div>
 
@@ -384,8 +384,8 @@ export default function CreateAnalysis() {
                   onChange={() => {}}
                 />
                 <div className="toggle-label">
-                  <span className="toggle-title">Message Queue</span>
-                  <span className="toggle-desc">RabbitMQ, Kafka, or BullMQ</span>
+                  <span className="toggle-title">Queue</span>
+                  <span className="toggle-desc">e.g. RabbitMQ or Apache Kafka</span>
                 </div>
               </div>
             </div>
@@ -410,11 +410,11 @@ export default function CreateAnalysis() {
           ) : (
             <button className="btn btn-primary" onClick={submitAnalysis} disabled={loading || user?.role !== 'architect'}>
               {loading ? (
-                <span>Generating SRE Report...</span>
+                <span>Analyzing Architecture...</span>
               ) : (
                 <>
                   <CheckCircle2 size={16} style={{ color: 'var(--success)' }} />
-                  <span>Generate SRE Report</span>
+                  <span>Get Scaling Analysis</span>
                 </>
               )}
             </button>

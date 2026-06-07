@@ -98,7 +98,7 @@ export default function ReportDetail() {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
         <div className="terminal-console" style={{ height: 'auto', padding: '2rem', textAlign: 'center' }}>
-          Decompiling system design... running analysis engine...
+          Analyzing system design and performance...
         </div>
       </div>
     );
@@ -107,7 +107,7 @@ export default function ReportDetail() {
   if (error || !report) {
     return (
       <div className="glass-card" style={{ maxWidth: '600px', margin: '2rem auto', textAlign: 'center' }}>
-        <h2 style={{ color: 'var(--critical)', marginBottom: '1rem' }}>SRE Review Not Found</h2>
+        <h2 style={{ color: 'var(--critical)', marginBottom: '1rem' }}>Report Not Found</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>{error || 'The requested report could not be loaded.'}</p>
         <Link to="/" className="btn btn-secondary">
           <ArrowLeft size={16} /> Back to Dashboard
@@ -155,7 +155,7 @@ export default function ReportDetail() {
       {/* Back to Dashboard */}
       <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', color: 'var(--text-secondary)', textDecoration: 'none', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
         <ArrowLeft size={16} />
-        <span>Back to SRE Dashboard</span>
+        <span>Back to Dashboard</span>
       </Link>
 
       {/* Header */}
@@ -171,17 +171,17 @@ export default function ReportDetail() {
           </div>
           <button className="btn btn-secondary" onClick={fetchReport} title="Refresh analysis">
             <RefreshCw size={14} />
-            <span>Reload Analysis</span>
+            <span>Reload Report</span>
           </button>
         </div>
       </div>
 
       {/* SVG Score Circles */}
       <div className="scores-section">
-        {renderScoreCircle(results.score, 'Overall Index', 'Weighted scale readiness', overallScoreColor)}
-        {renderScoreCircle(results.subscores.scalability, 'Scalability', 'Compute & IO capacity', '#6366f1')}
-        {renderScoreCircle(results.subscores.reliability, 'Reliability', 'Failure & queue resilience', '#06b6d4')}
-        {renderScoreCircle(results.subscores.availability, 'Availability', 'Redundancy & failover', '#a855f7')}
+        {renderScoreCircle(results.score, 'Overall Score', 'How ready your app is to scale', overallScoreColor)}
+        {renderScoreCircle(results.subscores.scalability, 'Scalability', 'Processor & Database speed', '#6366f1')}
+        {renderScoreCircle(results.subscores.reliability, 'Reliability', 'How your app handles crashes', '#06b6d4')}
+        {renderScoreCircle(results.subscores.availability, 'Availability', 'Backup server setup', '#a855f7')}
       </div>
 
       {/* Main Report layout */}
@@ -195,7 +195,7 @@ export default function ReportDetail() {
             <div className="flow-header">
               <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Cpu style={{ color: 'var(--primary)' }} size={20} />
-                <span>Architecture Topology Visualizer</span>
+                <span>Architecture Map</span>
               </h3>
               
               {/* Toggle switch for current vs recommended layout */}
@@ -214,7 +214,7 @@ export default function ReportDetail() {
                     transition: 'all 0.2s'
                   }}
                 >
-                  Baseline Setup
+                  Current Setup
                 </button>
                 <button 
                   onClick={() => setTopologyView('recommended')} 
@@ -230,7 +230,7 @@ export default function ReportDetail() {
                     transition: 'all 0.2s'
                   }}
                 >
-                  Recommended Target
+                  Recommended Setup
                 </button>
               </div>
             </div>
@@ -255,7 +255,7 @@ export default function ReportDetail() {
           <div className="glass-card" style={{ background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(20, 18, 38, 0.5) 100%)' }}>
             <h3 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.8rem' }}>
               <Sparkles style={{ color: 'var(--primary)' }} size={20} />
-              <span>SRE Architectural Review</span>
+              <span>Design Recommendations</span>
             </h3>
             <p style={{ fontSize: '0.9rem', lineHeight: '1.6', color: 'var(--text-primary)', fontStyle: 'italic', borderLeft: '2px solid var(--primary)', paddingLeft: '0.8rem' }}>
               "{aiRecommendation?.summary || results.recommendationText}"

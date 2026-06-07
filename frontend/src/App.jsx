@@ -19,16 +19,15 @@ const ClearanceDenied = () => {
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '60vh' }}>
       <div className="glass-card" style={{ maxWidth: '600px', width: '100%', borderColor: 'var(--critical)', background: 'var(--critical-bg)', padding: '2.5rem' }}>
         <h2 style={{ fontFamily: 'var(--font-mono)', color: 'var(--critical)', marginBottom: '1rem', borderBottom: '1px solid rgba(239, 68, 68, 0.2)', paddingBottom: '0.5rem' }}>
-          [ERR_SECURITY_RESTRICTION]
+          Access Denied
         </h2>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '2rem' }}>
-          <div>LOG_LEVEL: CRITICAL</div>
-          <div>REMOTE_ADDR: {ip}</div>
+          <div>IP ADDRESS: {ip}</div>
           <div>TIMESTAMP: {timestamp}</div>
-          <div>MESSAGE: Access to core analytics node requires verification signatures. Authorization token absent from browser headers.</div>
+          <div>MESSAGE: You need to log in to access this page. Please log in using one of the demo roles or your credentials.</div>
         </div>
         <Link to="/login" className="btn btn-danger" style={{ width: '100%' }}>
-          LAUNCH AUTHENTICATION CHALLENGE
+          Log In
         </Link>
       </div>
     </div>
@@ -55,8 +54,8 @@ const AuthenticatedHome = () => {
 
 const StandaloneLoadTest = () => (
   <div>
-    <h1 className="text-gradient" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>Standalone Load Tester</h1>
-    <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Target any local or remote service endpoint to benchmark HTTP performance in real-time.</p>
+    <h1 className="text-gradient" style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>Stress Tester</h1>
+    <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>Enter any URL or API endpoint to test its performance under load in real-time.</p>
     <LiveTestConsole />
   </div>
 );
