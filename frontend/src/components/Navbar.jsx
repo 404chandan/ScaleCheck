@@ -58,23 +58,7 @@ export default function Navbar() {
               <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} end>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
                   <LayoutDashboard size={16} />
-                  <span>Dashboard</span>
-                </div>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/create" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <FileSpreadsheet size={16} />
-                  <span>Architecture Planner</span>
-                </div>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/loadtest" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                  <Activity size={16} />
-                  <span>Stress Tester</span>
+                  <span>Home</span>
                 </div>
               </NavLink>
             </li>
