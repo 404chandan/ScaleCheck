@@ -6,7 +6,7 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
   const [url, setUrl] = useState(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/health`);
   const [connections, setConnections] = useState(10);
   const [duration, setDuration] = useState(10);
-  
+
   const [isRunning, setIsRunning] = useState(false);
   const [logs, setLogs] = useState([]);
   const [chartDataPoints, setChartDataPoints] = useState([]); // Array of { sec, rps, lat }
@@ -34,14 +34,14 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
     setFinalResult(null);
     setLogs([]);
     setChartDataPoints([]);
-    
+
     addLog(`Initializing stress test runner for: ${url}`, 'info');
     addLog(`Configuration: Concurrency=${connections} threads, Duration=${duration}s`, 'info');
     addLog(`Establishing SSE pipeline to backend load tester...`, 'info');
 
     // Create SSE query url
     const sseUrl = `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/loadtest/run?url=${encodeURIComponent(url)}&connections=${connections}&duration=${duration}&analysisId=${analysisId}`;
-    
+
     try {
       const es = new EventSource(sseUrl);
       eventSourceRef.current = es;
@@ -51,7 +51,7 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
 
         if (message.type === 'tick') {
           const { requests, throughput, latency, errors, durationCompleted } = message.data;
-          
+
           addLog(
             `[T+${durationCompleted}s] Total Req: ${requests} | Current RPS: ${Math.round(throughput)} | Avg Latency: ${Math.round(latency)}ms | Errors: ${errors}`,
             errors > 0 ? 'error' : 'default'
@@ -61,8 +61,8 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
             ...prev,
             { sec: durationCompleted, rps: throughput, lat: latency }
           ]);
-        } 
-        
+        }
+
         else if (message.type === 'done') {
           const res = message.results;
           addLog(`--------------------------------------------------`, 'info');
@@ -73,12 +73,12 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
           addLog(`99th Percentile Latency: ${Math.round(res.results.p99Latency)}ms`, 'success');
           addLog(`Failure Rate: ${res.results.failureRate}%`, res.results.failureRate > 0 ? 'error' : 'success');
           addLog(`--------------------------------------------------`, 'info');
-          
+
           setFinalResult(res.results);
           setIsRunning(false);
           es.close();
-        } 
-        
+        }
+
         else if (message.type === 'error') {
           addLog(`❌ Server Error: ${message.message}`, 'error');
           setIsRunning(false);
@@ -100,7 +100,7 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
 
   const cancelTest = () => {
     if (!isRunning) return;
-    
+
     addLog(`⏹ Stress test aborted by user. Tearing down connections...`, 'error');
     if (eventSourceRef.current) {
       eventSourceRef.current.close();
@@ -183,9 +183,9 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <div className="form-group">
           <label>Target API Endpoint URL</label>
-          <input 
-            type="text" 
-            className="form-control" 
+          <input
+            type="text"
+            className="form-control"
             placeholder="http://localhost:5000/health"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
@@ -196,10 +196,10 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
         <div className="form-row">
           <div className="form-group">
             <label>Concurrency ({connections} connections)</label>
-            <input 
-              type="range" 
-              min="1" 
-              max="100" 
+            <input
+              type="range"
+              min="1"
+              max="100"
               value={connections}
               onChange={(e) => setConnections(Number(e.target.value))}
               disabled={isRunning}
@@ -208,10 +208,10 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
           </div>
           <div className="form-group">
             <label>Duration ({duration} seconds)</label>
-            <input 
-              type="range" 
-              min="5" 
-              max="60" 
+            <input
+              type="range"
+              min="5"
+              max="60"
               value={duration}
               onChange={(e) => setDuration(Number(e.target.value))}
               disabled={isRunning}
