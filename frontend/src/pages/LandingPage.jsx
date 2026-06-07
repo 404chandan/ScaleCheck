@@ -278,31 +278,67 @@ export default function LandingPage() {
       <div className="ambient-glow-login" style={{ top: '15%', left: '10%', opacity: 0.7 }}></div>
       <div className="ambient-glow-login" style={{ top: '70%', left: '80%', background: 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 75%)', opacity: 0.7 }}></div>
 
-      {/* Title & ASCII art Area */}
-      <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-        <pre style={{ 
-          fontFamily: 'var(--font-mono)', 
-          fontSize: '0.8rem', 
-          lineHeight: '1.2', 
-          color: 'var(--primary)',
-          textShadow: '0 0 10px var(--primary-glow)',
-          overflowX: 'auto',
-          padding: '1rem 0',
-          background: 'rgba(8,7,16,0.3)',
-          border: '1px solid var(--surface-border)',
-          borderRadius: 'var(--radius-md)',
-          display: 'inline-block',
-          width: '100%',
-          maxWidth: '620px'
+      {/* Premium Hero Header Section */}
+      <div style={{ textAlign: 'center', marginTop: '2.5rem', marginBottom: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+        {/* Glow Badge */}
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          padding: '0.4rem 1rem',
+          background: 'rgba(99, 102, 241, 0.08)',
+          border: '1px solid rgba(99, 102, 241, 0.25)',
+          borderRadius: '99px',
+          fontSize: '0.75rem',
+          fontWeight: '600',
+          color: 'var(--text-primary)',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          boxShadow: '0 0 15px rgba(99, 102, 241, 0.15)'
         }}>
-{`   ___   ___   __   _     ____  ___   _  _  ____  ___  _  _ 
-  / __) / __) /__\\ ( )   (  __)/ __) ( )_( )(  __)/ __)( )_( )
-  \\__ \\( (__ /(__)\\/ (_/\  ) _) ( (__  ) _ (  ) _) ( (__  ) _ ( 
-  (___/ \\___)(__)(__)____)(____)\\___)(_) (_)(____)\\___)(_) (_)`}
-        </pre>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginTop: '1rem', letterSpacing: '0.05em', fontFamily: 'var(--font-mono)' }}>
-          [System Design & Load Testing Analyzer]
+          <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--secondary)', boxShadow: '0 0 8px var(--secondary-glow)' }}></span>
+          SYSTEM STABILITY ENGINE v1.4.0
+        </div>
+
+        {/* Big Premium Title */}
+        <h1 style={{ 
+          fontSize: '3.5rem', 
+          fontWeight: '800', 
+          lineHeight: '1.1',
+          letterSpacing: '-0.03em',
+          background: 'linear-gradient(135deg, #ffffff 10%, #a5b4fc 50%, #06b6d4 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          textShadow: '0 0 30px rgba(99, 102, 241, 0.1)',
+          margin: '0.5rem 0'
+        }}>
+          ScaleCheck
+        </h1>
+
+        {/* Description Tagline */}
+        <p style={{ 
+          color: 'var(--text-secondary)', 
+          fontSize: '1rem', 
+          maxWidth: '540px',
+          lineHeight: '1.6',
+          margin: 0
+        }}>
+          Verify system configurations, run live API load tests, and optimize database topologies to avoid service crashes.
         </p>
+
+        {/* Techie status line */}
+        <div style={{ 
+          fontFamily: 'var(--font-mono)', 
+          fontSize: '0.75rem', 
+          color: 'var(--text-muted)',
+          display: 'flex',
+          gap: '1.5rem',
+          marginTop: '0.5rem'
+        }}>
+          <span>● ENGINE: ONLINE</span>
+          <span>● LATENCY: 0.04ms</span>
+          <span>● ACTIVE SESSIONS: 12</span>
+        </div>
       </div>
 
       {/* Main Split Console Grid */}

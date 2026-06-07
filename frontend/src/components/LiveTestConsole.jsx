@@ -250,34 +250,59 @@ export default function LiveTestConsole({ analysisId = 'unlinked' }) {
       {/* Real-time split layout */}
       <div className="live-test-layout" style={{ marginTop: '0.5rem' }}>
         {/* Terminal log */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: 1 }}>
           <div style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Console Logs</div>
-          <div className="terminal-console">
-            {logs.length === 0 ? (
-              <span style={{ color: 'var(--text-muted)' }}>Console idle. Start a stress test to see live logs...</span>
-            ) : (
-              logs.map((log, index) => (
-                <div key={index} className={`terminal-line ${log.type}`}>
-                  <span style={{ color: '#4b5563', marginRight: '0.5rem' }}>[{log.time}]</span>
-                  {log.text}
-                </div>
-              ))
-            )}
-            <div ref={terminalEndRef} />
+          <div style={{ border: '1px solid rgba(255, 255, 255, 0.05)', borderRadius: 'var(--radius-md)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+            <div className="window-header">
+              <div className="window-dots">
+                <span className="window-dot red"></span>
+                <span className="window-dot yellow"></span>
+                <span className="window-dot green"></span>
+              </div>
+              <h4 className="window-title" style={{ color: 'var(--success)', margin: 0, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <TermIcon size={12} />
+                <span>LOAD_TESTER_TERMINAL</span>
+              </h4>
+            </div>
+            <div className="terminal-console" style={{ borderRadius: 0, border: 'none' }}>
+              {logs.length === 0 ? (
+                <span style={{ color: 'var(--text-muted)' }}>Console idle. Start a stress test to see live logs...</span>
+              ) : (
+                logs.map((log, index) => (
+                  <div key={index} className={`terminal-line ${log.type}`}>
+                    <span style={{ color: '#4b5563', marginRight: '0.5rem' }}>[{log.time}]</span>
+                    {log.text}
+                  </div>
+                ))
+              )}
+              <div ref={terminalEndRef} />
+            </div>
           </div>
         </div>
 
         {/* Real-time Chart */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: 1 }}>
           <div style={{ fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Live Chart</div>
-          <div className="glass-card" style={{ height: '320px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
-            {chartDataPoints.length === 0 ? (
-              <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Waiting for test to start...</span>
-            ) : (
-              <div style={{ width: '100%', height: '100%' }}>
-                <Line data={liveChartData} options={chartOptions} />
+          <div className="glass-card" style={{ height: '350px', display: 'flex', flexDirection: 'column', padding: 0, overflow: 'hidden' }}>
+            <div className="window-header">
+              <div className="window-dots">
+                <span className="window-dot red"></span>
+                <span className="window-dot yellow"></span>
+                <span className="window-dot green"></span>
               </div>
-            )}
+              <h4 className="window-title" style={{ color: 'var(--secondary)', margin: 0, display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                <span>METRICS_LIVE_CHART</span>
+              </h4>
+            </div>
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem' }}>
+              {chartDataPoints.length === 0 ? (
+                <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Waiting for test to start...</span>
+              ) : (
+                <div style={{ width: '100%', height: '100%' }}>
+                  <Line data={liveChartData} options={chartOptions} />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
